@@ -2,8 +2,8 @@
 <html>
 <head>
 <script>
-var isBlink = (isChrome || isOpera) && !!window.CSS;  
-if(isBlink){
+var isChrome = !!window.chrome && !!window.chrome.webstore;
+if(isChrome){
 
 window['_fs_debug'] = false;
 window['_fs_host'] = 'www.fullstory.com';
@@ -17,9 +17,9 @@ window['_fs_org'] = '12E7Y';
   g.clearUserCookie=function(d,i){d=n.domain;while(1){n.cookie='fs_uid=;domain='+d+
   ';path=/;expires='+new Date(0);i=d.indexOf('.');if(i<0)break;d=d.slice(i+1)}}
 })(window,document,'FS','script','user');
-  alert('blinks');
+  alert('chrome');
 } else {
-    alert('blinks not');
+    alert('chrome not');
 }
 </script>
 </head>
