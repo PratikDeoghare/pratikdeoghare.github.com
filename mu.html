@@ -1,0 +1,14 @@
+
+<!DOCTYPE html>
+<head>
+  <script>
+    var observer = new MutationObserver(function(r) {
+    console.log(r);
+    });
+    observer.observe(document.documentElement, {childList: true, subtree: true});
+  </script>
+
+</head>
+<body>
+  <p>Hello, World</p>
+</body>
