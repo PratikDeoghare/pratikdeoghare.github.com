@@ -1,0 +1,36 @@
+
+<html>
+  <head>
+  
+      <script>
+    var observer = new MutationObserver(function(r) {
+    console.log(r);
+    });
+    observer.observe(document.documentElement, {childList: true, subtree: true});
+  </script>
+
+  </head>
+  <body>
+    Hello aaaa
+    
+    <div> foo </div>
+        <div> bar </div>
+        <div> spam </div>
+
+    <script>
+      var div = document.getElementsByTagName('div')[0];
+      div.parentNode.removeChild(div);
+ 
+      var newdiv = document.createElement('div');
+      newdiv.innerHTML = 'new div';
+      var body = document.getElementsByTagName('body')[0];
+      body.appendChild(newdiv);
+
+    </script> 
+    
+    <div> Tom </div>
+        <div> Dick </div>
+        <div> Harry </div>
+
+  </body>
+  </head>
