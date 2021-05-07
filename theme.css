@@ -1,10 +1,15 @@
 
 a{color:inherit;}
-h1,h2{color: #3a2de2;}
+/* h1,h2{color: #3a2de2;} */
+
 body{
     font-family: 'Open Sans', sans-serif;
-    color: #3A4145;
+    background: #ffffe4; /*#3A4145;*/
     font-size: 1.2em;
     line-height: 1.6em;
     padding: 1em;
+}
+
+pre{
+	font-weight: bold;
 }
