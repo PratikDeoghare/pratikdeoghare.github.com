@@ -3,13 +3,15 @@ a{color:inherit;}
 /* h1,h2{color: #3a2de2;} */
 
 body{
-    font-family: 'Open Sans', sans-serif;
+/*    font-family: 'Open Sans', sans-serif;*/
     background: #ffffe4; /*#3A4145;*/
     font-size: 1.2em;
     line-height: 1.6em;
     padding: 1em;
+    width: 100%;
+    max-width: 700px;
 }
 
-pre{
+pre, code{
 	font-weight: bold;
 }
