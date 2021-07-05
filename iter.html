@@ -67,10 +67,20 @@ func (t setSliceInt) iter(acc []int, ch chan []int) <-chan []int {
 	}
 ...
 
-</pre> 
+</pre>
 
+	<hr>
+	<p>
+		<b> Note: </b> This has been suggested before and
+		there are some problems with it as pointed
+		out <a href="https://github.com/golang/go/issues/43557#issuecomment-755784044">here</a>.
+		In this post however I only wanted demonstrate this interesting
+		way of thinking and not worry about performance and other issues.
 
-<hr />
+		<img src="iter.png"/>
+	</p>
+
+	<hr/>
 
 Full code bewlow and  
  <a href="https://play.golang.org/p/QMQJRchVYLY"> in the playground. </a>
