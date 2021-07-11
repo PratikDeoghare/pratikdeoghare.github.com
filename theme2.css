@@ -11,6 +11,10 @@ code, pre {
     color: white;
 }
 
+pre {
+    overflow-x: scroll;
+}
+
 @media print {
     body {
         max-width: none
