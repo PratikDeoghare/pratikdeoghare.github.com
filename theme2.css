@@ -1,27 +1,20 @@
+
 body {
-    margin: 1em auto;
-    background-color: lightcyan;
-    max-width: 50em;
-    padding: 0.62em;
-    font: 1.2em/1.6 sans-serif;
+    font-family: sans-serif;
+    line-height: 150%;
+    padding: 1em;
 }
 
-code, pre {
-    background: black;
-    color: white;
+h1, h2, h3 {
+    font-weight: normal;
+}
+
+pre, code {
+    font-size: 120%;
+    background: floralwhite;
 }
 
 pre {
+    padding: 1em;
     overflow-x: scroll;
-}
-
-@media print {
-    body {
-        max-width: none
-    }
-}
-
-a {
-    text-decoration: none;
-    color: brown;
 }
