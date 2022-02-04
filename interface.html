@@ -2,51 +2,48 @@
 <head>
 
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Embedding Golang Interfaces into Structs to Simplify Testing </title>
 
-	<link rel="stylesheet" href="theme2.css">
+	<link rel="stylesheet" href="style.css">
 
-	<style>
+    <style>
 
-	</style>
+    </style>
 
 </head>
 <body>
-<section>
 
 <h2>Embedding Golang Interfaces into Structs to Simplify Testing</h2>
 
 <p>
-	You can embed an interface inside a struct in golang. I discovered it
-	by accident not by reading the manual.
+    You can embed an interface inside a struct in golang. I discovered it
+    by accident not by reading the manual.
 
 </p>
 
 <p>
-	Here is a problem that it solves. Here are many more [1]. 
+    Here is a problem that it solves. Here are many more [1].
 </p>
 
 <p>
-	You have a dependency on an external library. The library 
-	exports a large interface. You want to mock it for testing
-	but then you will have to implement all the methods on it. 
-	That can be a lot of work. What if you could implement just the 
-	methods you need? 
+    You have a dependency on an external library. The library
+    exports a large interface. You want to mock it for testing
+    but then you will have to implement all the methods on it.
+    That can be a lot of work. What if you could implement just the
+    methods you need?
 </p>
 
 <p>
-	You can do that by embedding interfaces like this. You embed <code> LargeExternalClient</code> 
-interface into <code> mockClient</code>, then implement only <code> MethodF</code> from the interface because 
-that is the only one <code> YourClient</code> uses. If somewhere in the code some other method 
-on the interface is in use without your knowledge and you don't implement it on 
-<code> mockClient</code>, you will get a panic. A good thing. Then you just add that one. Test
-won't silently pass. 
+    You can do that by embedding interfaces like this. You embed <code> LargeExternalClient</code>
+    interface into <code> mockClient</code>, then implement only <code> MethodF</code> from the interface because
+    that is the only one <code> YourClient</code> uses. If somewhere in the code some other method
+    on the interface is in use without your knowledge and you don't implement it on
+    <code> mockClient</code>, you will get a panic. A good thing. Then you just add that one. Test
+    won't silently pass.
 </p>
 
-<p>
-	Playground link <a href="https://play.golang.org/p/YqlBS6oRME8">https://play.golang.org/p/YqlBS6oRME8</a>
 
 <pre>
 package main
@@ -99,14 +96,16 @@ func TestYourClient(t *testing.T) {
 }
 
 </pre>
+
+<p>
+	Playground link <a href="https://play.golang.org/p/YqlBS6oRME8">https://play.golang.org/p/YqlBS6oRME8</a>
 </p>
 
 <h3> References </h3>
 
+[1] Embedding in Go: Part 3 - interfaces in structs <a
+        href="https://eli.thegreenplace.net/2020/embedding-in-go-part-3-interfaces-in-structs/">https://eli.thegreenplace.net/2020/embedding-in-go-part-3-interfaces-in-structs/</a>
 
-	[1] Embedding in Go: Part 3 - interfaces in structs  <a href="https://eli.thegreenplace.net/2020/embedding-in-go-part-3-interfaces-in-structs/">https://eli.thegreenplace.net/2020/embedding-in-go-part-3-interfaces-in-structs/</a>
-
-</section>
 
 </body>
 </html>
