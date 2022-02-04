@@ -1,27 +1,26 @@
 <html>
 <head>
     <title> A Functioanlly Inspired Generic Red-Black Tree Implementation in Golang 2 </title>
-	<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2 class="red">A Generic Red-Black Tree Implementation in Golang</h2>
-    <h3> Findings </h3>
-    <p>
-    <ul>
-        <li>To balance the tree CLRS implementation <i>rotates</i> the subtrees. The functional implementations <i>rewrites</i> the tree [1,2]. Thinking in terms of rewriting instead of rotating
-            feels like looking at the problem in a proper coordinate system. My implementation here is translation of
-            Matt Might's Haskell code in go.
-        </li>
-        <li>The generics syntax is easy on eyes. I like it.</li>
-    </ul>
+<h2 class="red">A Generic Red-Black Tree Implementation in Golang</h2>
+<h3> Findings </h3>
+<p>
+To balance the tree CLRS implementation <i>rotates</i> the subtrees. The functional implementations <i>rewrites</i>
+    the tree [1,2]. Thinking in terms of rewriting instead of rotating
+    feels like looking at the problem in a proper coordinate system. My implementation here is translation of
+    Matt Might's Haskell code in go.
+</p>
+<p>
+	The generics syntax is easy on eyes. I like it.
+</p>
 
 
+<h3> Code </h3>
 
-
-    <h3> Code </h3>
-
-        <a href="https://go2goplay.golang.org/p/3Jmkjh5RHFs"> playground link</a>
-    <pre>
+<a href="https://go2goplay.golang.org/p/3Jmkjh5RHFs"> playground link</a>
+<pre>
 // A generic red-black tree implementation from the
 // functional implementation by Matt Might[1] and Okasaki.
 //
@@ -398,14 +397,15 @@ func main() {
 
 <h3> References </h3>
 <p>
-	1. <a href="http://matt.might.net/articles/red-black-delete/">The missing method: Deleting from Okasaki's
-		red-black trees by Matt Might
-	</a>
-	<br>
-	2. <a href="https://www.cs.tufts.edu/~nr/cs257/archive/chris-okasaki/redblack99.pdf"> Red-Black Trees in a Functional Setting by Okasaki</a>
-	<br>
-	3. <a href="https://blog.golang.org/generics-next-step">The Next Step for Generics
-		by Ian Lance Taylor and Robert Griesemer</a>
+    1. <a href="http://matt.might.net/articles/red-black-delete/">The missing method: Deleting from Okasaki's
+    red-black trees by Matt Might
+</a>
+    <br>
+    2. <a href="https://www.cs.tufts.edu/~nr/cs257/archive/chris-okasaki/redblack99.pdf"> Red-Black Trees in a
+    Functional Setting by Okasaki</a>
+    <br>
+    3. <a href="https://blog.golang.org/generics-next-step">The Next Step for Generics
+    by Ian Lance Taylor and Robert Griesemer</a>
 </p>
 
 </body>
