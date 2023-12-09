@@ -23,7 +23,7 @@ mathjax = true
 identifier = "about"
 name = "About"
 url = "/about/"
-weight = 1
+weight = 3
 
 [[menu.main]]
 identifier = "tags"
@@ -35,4 +35,4 @@ weight = 2
 name = "Archive"
 identifier = "archive"
 url = "/posts/"
-weight = 3
+weight = 1
