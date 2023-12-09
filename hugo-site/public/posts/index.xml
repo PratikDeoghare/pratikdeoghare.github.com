@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Pratik Deoghare</title>
-    <link>/posts/</link>
+    <link>https://pratik.deoghare.com/posts/</link>
     <description>Pratik Deoghare (Posts)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 01 Jul 2023 00:00:00 +0000</lastBuildDate>
     
-    <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://pratik.deoghare.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Why Doesn&#39;t The Simple Formula Work?</title>
-      <link>/posts/sum35/</link>
+      <link>https://pratik.deoghare.com/posts/sum35/</link>
       <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>/posts/sum35/</guid>
+      <guid>https://pratik.deoghare.com/posts/sum35/</guid>
       <description>&lt;p&gt;Problem: Write a program to find sum of all multiples of 3 and 5 upto input n.
 If a number is multiple of both 3 and 5 add it only once.&lt;/p&gt;
 &lt;p&gt;We were given this problem at work. I tried to “solve” it using math. Clearly,
@@ -65,10 +65,10 @@ straightforward isn’t it? Enjoy!&lt;/p&gt;
     
     <item>
       <title>Could Touch-Typing Be Bad For You?</title>
-      <link>/posts/keyboard/</link>
+      <link>https://pratik.deoghare.com/posts/keyboard/</link>
       <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
       
-      <guid>/posts/keyboard/</guid>
+      <guid>https://pratik.deoghare.com/posts/keyboard/</guid>
       <description>&lt;p&gt;Why people who don&amp;rsquo;t touch-type,
 type with just two fingers,
 don&amp;rsquo;t seem to get
@@ -85,10 +85,10 @@ And perhaps thinking a little more.&lt;/p&gt;
     
     <item>
       <title>Using Complex Numbers to Move Mars Rover</title>
-      <link>/posts/complex-mars-rover/</link>
+      <link>https://pratik.deoghare.com/posts/complex-mars-rover/</link>
       <pubDate>Wed, 15 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>/posts/complex-mars-rover/</guid>
+      <guid>https://pratik.deoghare.com/posts/complex-mars-rover/</guid>
       <description>&lt;p&gt;Recently I was given &lt;a href=&#34;https://code.google.com/archive/p/marsrovertechchallenge/&#34;&gt;Mars Rover Problem&lt;/a&gt; and told that my solution was pretty cool. Before that I assumed this is how everybody else was doing it ;). Here is &lt;a href=&#34;https://github.com/pratikdeoghare/mars-rover-problem&#34;&gt;golang implementation&lt;/a&gt;. Enjoy!&lt;/p&gt;
 &lt;h2 id=&#34;design&#34; &gt;Design
 &lt;span&gt;
@@ -132,10 +132,10 @@ And perhaps thinking a little more.&lt;/p&gt;
     
     <item>
       <title>Iterating Over A Trie With Channels And Goroutines</title>
-      <link>/posts/iter/</link>
+      <link>https://pratik.deoghare.com/posts/iter/</link>
       <pubDate>Sun, 23 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>/posts/iter/</guid>
+      <guid>https://pratik.deoghare.com/posts/iter/</guid>
       <description>&lt;p&gt;We have a trie that stores set of integer slices. We want an iterator over its items.&lt;/p&gt;
 &lt;p&gt;What we do here is have one goroutine to walk over the trie and send the items over channel. Other goroutine pulls the items from the channel and prints them out.&lt;/p&gt;
 &lt;p&gt;My mental image of this is one gopher jumping around a tree and throwing mangoes back at his friend on the ground.&lt;/p&gt;
@@ -298,10 +298,10 @@ func main() {
     
     <item>
       <title>Embedding Golang Interfaces Into Structs To Simplify Testing</title>
-      <link>/posts/interface/</link>
+      <link>https://pratik.deoghare.com/posts/interface/</link>
       <pubDate>Fri, 07 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>/posts/interface/</guid>
+      <guid>https://pratik.deoghare.com/posts/interface/</guid>
       <description>&lt;p&gt;You can embed an interface inside a struct in golang. I discovered it by accident not by reading the manual.&lt;/p&gt;
 &lt;p&gt;Here is a problem that it solves. There are many more in &lt;a href=&#34;https://eli.thegreenplace.net/2020/embedding-in-go-part-3-interfaces-in-structs/&#34;&gt;Embedding in Go: Part 3 - interfaces in structs &lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;You have a dependency on an external library. The library exports a large interface. You want to mock it for testing but then you will have to implement all the methods on it. That can be a lot of work. What if you could implement just the methods you need?&lt;/p&gt;
@@ -361,10 +361,10 @@ func TestYourClient(t *testing.T) {
     
     <item>
       <title>A Generic Red-Black Tree Implementation In Golang</title>
-      <link>/posts/go2redblack/</link>
+      <link>https://pratik.deoghare.com/posts/go2redblack/</link>
       <pubDate>Thu, 26 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>/posts/go2redblack/</guid>
+      <guid>https://pratik.deoghare.com/posts/go2redblack/</guid>
       <description>&lt;p&gt;To balance the tree CLRS implementation rotates the subtrees. The functional implementations rewrites the tree [1,2]. Thinking in terms of rewriting instead of rotating feels like looking at the problem in a proper coordinate system. My implementation here is translation of Matt Might&amp;rsquo;s Haskell code in go.&lt;/p&gt;
 &lt;p&gt;The generics syntax is easy on eyes. I like it.&lt;/p&gt;
 &lt;h2 id=&#34;references&#34; &gt;References

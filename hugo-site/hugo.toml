@@ -1,3 +1,4 @@
+baseURL = 'https://pratik.deoghare.com/'
 languageCode = 'en-us'
 title = 'Pratik Deoghare'
 theme = 'anubis'

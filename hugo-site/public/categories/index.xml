@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Pratik Deoghare</title>
-    <link>/categories/</link>
+    <link>https://pratik.deoghare.com/categories/</link>
     <description>Pratik Deoghare (Categories)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-    <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://pratik.deoghare.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

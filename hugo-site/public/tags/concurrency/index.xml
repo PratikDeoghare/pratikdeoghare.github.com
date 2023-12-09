@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>concurrency on Pratik Deoghare</title>
-    <link>/tags/concurrency/</link>
+    <link>https://pratik.deoghare.com/tags/concurrency/</link>
     <description>Pratik Deoghare (concurrency)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 23 May 2021 00:00:00 +0000</lastBuildDate>
     
-    <atom:link href="/tags/concurrency/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://pratik.deoghare.com/tags/concurrency/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Iterating Over A Trie With Channels And Goroutines</title>
-      <link>/posts/iter/</link>
+      <link>https://pratik.deoghare.com/posts/iter/</link>
       <pubDate>Sun, 23 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>/posts/iter/</guid>
+      <guid>https://pratik.deoghare.com/posts/iter/</guid>
       <description>&lt;p&gt;We have a trie that stores set of integer slices. We want an iterator over its items.&lt;/p&gt;
 &lt;p&gt;What we do here is have one goroutine to walk over the trie and send the items over channel. Other goroutine pulls the items from the channel and prints them out.&lt;/p&gt;
 &lt;p&gt;My mental image of this is one gopher jumping around a tree and throwing mangoes back at his friend on the ground.&lt;/p&gt;

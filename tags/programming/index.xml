@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>programming on Pratik Deoghare</title>
-    <link>/tags/programming/</link>
+    <link>https://pratik.deoghare.com/tags/programming/</link>
     <description>Pratik Deoghare (programming)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 01 Jul 2023 00:00:00 +0000</lastBuildDate>
     
-    <atom:link href="/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://pratik.deoghare.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Why Doesn&#39;t The Simple Formula Work?</title>
-      <link>/posts/sum35/</link>
+      <link>https://pratik.deoghare.com/posts/sum35/</link>
       <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>/posts/sum35/</guid>
+      <guid>https://pratik.deoghare.com/posts/sum35/</guid>
       <description>&lt;p&gt;Problem: Write a program to find sum of all multiples of 3 and 5 upto input n.
 If a number is multiple of both 3 and 5 add it only once.&lt;/p&gt;
 &lt;p&gt;We were given this problem at work. I tried to “solve” it using math. Clearly,

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>keyboard on Pratik Deoghare</title>
-    <link>/tags/keyboard/</link>
+    <link>https://pratik.deoghare.com/tags/keyboard/</link>
     <description>Pratik Deoghare (keyboard)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 01 Jun 2023 00:00:00 +0000</lastBuildDate>
     
-    <atom:link href="/tags/keyboard/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://pratik.deoghare.com/tags/keyboard/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Could Touch-Typing Be Bad For You?</title>
-      <link>/posts/keyboard/</link>
+      <link>https://pratik.deoghare.com/posts/keyboard/</link>
       <pubDate>Thu, 01 Jun 2023 00:00:00 +0000</pubDate>
       
-      <guid>/posts/keyboard/</guid>
+      <guid>https://pratik.deoghare.com/posts/keyboard/</guid>
       <description>&lt;p&gt;Why people who don&amp;rsquo;t touch-type,
 type with just two fingers,
 don&amp;rsquo;t seem to get

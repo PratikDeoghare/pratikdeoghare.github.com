@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>functional-programming on Pratik Deoghare</title>
-    <link>/tags/functional-programming/</link>
+    <link>https://pratik.deoghare.com/tags/functional-programming/</link>
     <description>Pratik Deoghare (functional-programming)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 26 Nov 2020 00:00:00 +0000</lastBuildDate>
     
-    <atom:link href="/tags/functional-programming/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://pratik.deoghare.com/tags/functional-programming/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>A Generic Red-Black Tree Implementation In Golang</title>
-      <link>/posts/go2redblack/</link>
+      <link>https://pratik.deoghare.com/posts/go2redblack/</link>
       <pubDate>Thu, 26 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>/posts/go2redblack/</guid>
+      <guid>https://pratik.deoghare.com/posts/go2redblack/</guid>
       <description>&lt;p&gt;To balance the tree CLRS implementation rotates the subtrees. The functional implementations rewrites the tree [1,2]. Thinking in terms of rewriting instead of rotating feels like looking at the problem in a proper coordinate system. My implementation here is translation of Matt Might&amp;rsquo;s Haskell code in go.&lt;/p&gt;
 &lt;p&gt;The generics syntax is easy on eyes. I like it.&lt;/p&gt;
 &lt;h2 id=&#34;references&#34; &gt;References
