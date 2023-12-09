@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+
+<html lang="en-us" data-theme="">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Embedding Golang Interfaces Into Structs To Simplify Testing - Pratik Deoghare</title>
+
+<meta name="description" content="You can embed an interface inside a struct in golang. I discovered it by accident not by reading the manual.
+Here is a problem that it solves. There are many more in Embedding in Go: Part 3 - interfaces in structs .
+You have a dependency on an external library. The library exports a large interface. You want to mock it for testing but then you will have to implement all the methods on it.">
+
+
+
+
+
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="favicon.png">
+
+
+
+
+    
+
+
+
+
+
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <link rel="stylesheet" href="/css/style.min.5aca35955b4a4a2b3987b33115c6840f82dd4fb76a33d9d54ec059a3c019dd8c.css" integrity="sha256-Wso1lVtKSis5h7MxFcaED4LdT7dqM9nVTsBZo8AZ3Yw=">
+    
+
+
+
+
+
+
+
+
+<meta property="og:title" content="Embedding Golang Interfaces Into Structs To Simplify Testing" />
+<meta property="og:description" content="You can embed an interface inside a struct in golang. I discovered it by accident not by reading the manual.
+Here is a problem that it solves. There are many more in Embedding in Go: Part 3 - interfaces in structs .
+You have a dependency on an external library. The library exports a large interface. You want to mock it for testing but then you will have to implement all the methods on it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/interface/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-05-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-05-07T00:00:00+00:00" />
+
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Embedding Golang Interfaces Into Structs To Simplify Testing"/>
+<meta name="twitter:description" content="You can embed an interface inside a struct in golang. I discovered it by accident not by reading the manual.
+Here is a problem that it solves. There are many more in Embedding in Go: Part 3 - interfaces in structs .
+You have a dependency on an external library. The library exports a large interface. You want to mock it for testing but then you will have to implement all the methods on it."/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header class="common-header"> 
+            
+                <div class="header-top">
+    <h1 class="site-title">
+    <a href="/">Pratik Deoghare</a>
+</h1>
+    <ul class="social-icons">
+
+
+
+
+
+</ul>
+</div>
+
+    <nav>
+        
+        
+        <a class="" href="/about/" title="">About</a>
+        
+        <a class="" href="/tags/" title="">Tags</a>
+        
+        <a class="" href="/posts/" title="">Archive</a>
+        
+    </nav>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+    
+
+    <article class="post h-entry">
+        <div class="post-header">
+            <header>
+                <h1 class="p-name post-title">Embedding Golang Interfaces Into Structs To Simplify Testing</h1>
+
+                
+            </header>
+        </div>
+        
+
+
+
+
+        <div class="content e-content">
+            <p>You can embed an interface inside a struct in golang. I discovered it by accident not by reading the manual.</p>
+<p>Here is a problem that it solves. There are many more in <a href="https://eli.thegreenplace.net/2020/embedding-in-go-part-3-interfaces-in-structs/">Embedding in Go: Part 3 - interfaces in structs </a>.</p>
+<p>You have a dependency on an external library. The library exports a large interface. You want to mock it for testing but then you will have to implement all the methods on it. That can be a lot of work. What if you could implement just the methods you need?</p>
+<p>You can do that by embedding interfaces like this. You embed <code>LargeExternalClient</code> interface into <code>mockClient</code>, then implement only <code>MethodF</code> from the interface because that is the only one <code>YourClient</code> uses. If somewhere in the code some other method on the interface is in use without your knowledge and you don&rsquo;t implement it on <code>mockClient</code>, you will get a panic. A good thing. Then you just add that one. Test won&rsquo;t silently pass.</p>
+<p><a href="https://play.golang.org/p/YqlBS6oRME8">Playground link</a></p>
+<pre><code>package main
+
+import (
+    &quot;testing&quot;
+)
+
+// somewhere in the imported library.go
+
+type LargeExternalClient interface {
+    MethodA()
+    MethodB()
+    MethodC()
+    MethodD()
+    MethodE()
+    MethodF() int
+    MethodG()
+    MethodH()
+    MethodI()
+}
+
+// code.go
+type YourClient struct {
+    cli LargeExternalClient
+}
+
+func (y YourClient) Foo() int {
+    return y.cli.MethodF()
+}
+
+// code_test.go
+
+type mockClient struct {
+    LargeExternalClient
+}
+
+func (mockClient) MethodF() int {
+    return 23
+}
+
+func TestYourClient(t *testing.T) {
+    y := YourClient{
+        cli: new(mockClient),
+    }
+
+    if y.Foo() != 23 {
+        t.Fail()
+    }
+}
+</code></pre>
+
+        </div>
+        
+
+    
+
+
+
+<div class="post-info">
+    
+        <div class="post-date dt-published">
+            <a class="u-url" href="/posts/interface/"><time datetime="2021-05-07">2021-05-07</time></a>
+            
+        </div>
+    
+
+    <a class="post-hidden-url u-url" href="/posts/interface/">/posts/interface/</a>
+    <a href="" class="p-name p-author post-hidden-author h-card" rel="me">Pratik Deoghare</a>
+
+
+    <div class="post-taxonomies">
+        
+        
+            <ul class="post-tags">
+                
+                    
+                    <li><a href="/tags/golang/">#golang</a></li>
+                
+                    
+                    <li><a href="/tags/testing/">#testing</a></li>
+                
+            </ul>
+        
+        
+    </div>
+</div>
+
+    </article>
+
+    
+        
+        
+            <h3 class="read-next-title">Read next</h3>
+            <ul class="read-next-posts">
+                
+                <li><a href="/posts/go2redblack/">A Generic Red-Black Tree Implementation In Golang</a></li>
+                
+            </ul>
+        
+    
+
+    
+        
+    
+    
+    <div class="pagination post-pagination">
+        <div class="left pagination-item ">
+            
+                <a href="/posts/iter/">Iterating Over A Trie With Channels And Goroutines</a>
+            
+        </div>
+        <div class="right pagination-item ">
+            
+                <a href="/posts/go2redblack/">A Generic Red-Black Tree Implementation In Golang</a>
+            
+        </div>
+    </div>
+
+
+
+
+    
+
+    
+        
+
+
+
+
+
+
+
+
+    
+
+        </main>
+        
+            <footer class="common-footer">
+    
+    
+
+    <div class="common-footer-bottom">
+        
+        <div class="copyright">
+            <p>© Pratik Deoghare, 2023<br>
+            Powered by <a target="_blank" rel="noopener noreferrer" href="https://gohugo.io/">Hugo</a>, theme <a target="_blank" rel="noopener noreferrer" href="https://github.com/mitrichius/hugo-theme-anubis">Anubis</a>.<br>
+            
+            </p>  
+        </div> 
+
+        
+
+    
+
+
+
+   
+    </div>
+
+    <p class="h-card vcard">
+
+    <a href=ZgotmplZ class="p-name u-url url fn" rel="me">Pratik Deoghare</a> 
+
+    
+
+    
+</p> 
+</footer>
+
+        
+    </div>
+</body>
+</html>
