@@ -1,0 +1,21 @@
+body{
+	margin:40px auto;
+	max-width:650px;
+	line-height:1.6;
+	font-size:18pt;
+	color:#110077;
+	background: #ffffe4;
+	padding:0 10px
+}
+
+code { font-size: 15pt}
+pre{
+	font-size: 12pt
+}
+
+a:visited { color: #110077;}
+a {color: black;}
+
+h1,h2,h3{
+	line-height:1.2
+}
