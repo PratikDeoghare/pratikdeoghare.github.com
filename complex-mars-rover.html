@@ -1,61 +1,60 @@
+<!DOCTYPE html>
 <html>
 <head>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Using Complex Numbers to Move Mars Rover </title>
-    <link rel="stylesheet" href="style.css">
+  <meta name="generator" content=
+  "HTML Tidy for HTML5 for Linux version 5.8.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content=
+  "width=device-width, initial-scale=1">
+  <title>Using Complex Numbers to Move Mars Rover</title>
 </head>
 <body>
-<section>
-
-    <h2>Using Complex Numbers to Move Mars Rover</h2>
-
-    <p>Recently I was given <a href="https://code.google.com/archive/p/marsrovertechchallenge/">Mars Rover Problem</a>
-        and told that my solution was pretty cool. Before that I assumed this is how everybody else was
-        doing it :-). Here is <a href="https://github.com/pratikdeoghare/mars-rover-problem">golang implementation</a>.
-        Enjoy!</p>
-
-    <h3>Design</h3>
-
-    <p>Position and orientation are represented as complex numbers implemented as <code>type vect</code>.
-        Builtin complex type is not used because it uses floats which they can't be compared easily. </p>
-
-    <p>In calculations below <code>j</code> is <code>sqrt(-1)</code>. </p>
-
-    <p><strong>Multiplication of complex numbers allow us to rotate.</strong></p>
-
-    <p><code>L</code>: To rotate by 90 left we multiply by <code>j</code>.</p>
-
-    <p><code>R</code>: To rotate by 90 right we multiply by <code>-j</code>. </p>
-
-    <p>Mapping of directions to complex numbers.
-        <pre>
+  <h2>Using Complex Numbers to Move Mars Rover</h2>
+  <p>Recently I was given <a href=
+  "https://code.google.com/archive/p/marsrovertechchallenge/">Mars
+  Rover Problem</a> and told that my solution was pretty cool.
+  Before that I assumed this is how everybody else was doing it
+  :-). Here is <a href=
+  "https://github.com/pratikdeoghare/mars-rover-problem">golang
+  implementation</a>. Enjoy!</p>
+  <h3>Design</h3>
+  <p>Position and orientation are represented as complex numbers
+  implemented as <code>type vect</code>. Builtin complex type is
+  not used because it uses floats which they can't be compared
+  easily.</p>
+  <p>In calculations below <code>j</code> is
+  <code>sqrt(-1)</code>.</p>
+  <p><strong>Multiplication of complex numbers allow us to
+  rotate.</strong></p>
+  <p><code>L</code>: To rotate by 90 left we multiply by
+  <code>j</code>.</p>
+  <p><code>R</code>: To rotate by 90 right we multiply by
+  <code>-j</code>.</p>
+  <p>Mapping of directions to complex numbers.</p>
+  <pre>
             North: j
             East: 1
             West: -1
             South: j
-        </pre></p>
-
-    <p>Example: A rover is looking north and we issue <code>R</code> command. </p>
-
-    <p><pre>
+        </pre>
+  <p>Example: A rover is looking north and we issue <code>R</code>
+  command.</p>
+  <pre>
         North * R
         = j * -j
         = 1
         = East // position unchanged
-    </pre></p>
-
-    <p><strong>Addition of complex numbers allow for movements on the grid.</strong></p>
-
-    <p>Example: A rover is at <code>(1,2)</code> looking to east and we issue <code>M</code> command we expect it to be
-        at <code>(2,2)</code>.</p>
-
-    <p><pre>
+    </pre>
+  <p><strong>Addition of complex numbers allow for movements on the
+  grid.</strong></p>
+  <p>Example: A rover is at <code>(1,2)</code> looking to east and
+  we issue <code>M</code> command we expect it to be at
+  <code>(2,2)</code>.</p>
+  <pre>
         rover position (1,1) + E
         = (1 + 2j) + 1
         = 2 + 2j
         = (2, 2) // orientation unchanged
-    </pre></p>
-</section>
+    </pre>
 </body>
 </html>

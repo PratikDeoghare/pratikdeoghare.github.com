@@ -1,104 +1,90 @@
+<!DOCTYPE html>
 <html>
 <head>
-
-    <link rel="stylesheet" href="style.css">
-
+  <meta name="generator" content=
+  "HTML Tidy for HTML5 for Linux version 5.8.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content=
+  "width=device-width, initial-scale=1">
+  <title>Embedding Golang Interfaces into Structs to Simplify
+  Testing</title>
 </head>
 <body>
-
-<h2>Embedding Golang Interfaces into Structs to Simplify Testing</h2>
-
-<p>
-    You can embed an interface inside a struct in golang. I discovered it
-    by accident not by reading the manual.
-
-</p>
-
-<p>
-    Here is a problem that it solves. Here are many more [1].
-</p>
-
-<p>
-    You have a dependency on an external library. The library
-    exports a large interface. You want to mock it for testing
-    but then you will have to implement all the methods on it.
-    That can be a lot of work. What if you could implement just the
-    methods you need?
-</p>
-
-<p>
-    You can do that by embedding interfaces like this. You embed <code> LargeExternalClient</code>
-    interface into <code> mockClient</code>, then implement only <code> MethodF</code> from the interface because
-    that is the only one <code> YourClient</code> uses. If somewhere in the code some other method
-    on the interface is in use without your knowledge and you don't implement it on
-    <code> mockClient</code>, you will get a panic. A good thing. Then you just add that one. Test
-    won't silently pass.
-</p>
-
-
-<pre>
+  <h2>Embedding Golang Interfaces into Structs to Simplify
+  Testing</h2>
+  <p>You can embed an interface inside a struct in golang. I
+  discovered it by accident not by reading the manual.</p>
+  <p>Here is a problem that it solves. Here are many more [1].</p>
+  <p>You have a dependency on an external library. The library
+  exports a large interface. You want to mock it for testing but
+  then you will have to implement all the methods on it. That can
+  be a lot of work. What if you could implement just the methods
+  you need?</p>
+  <p>You can do that by embedding interfaces like this. You embed
+  <code>LargeExternalClient</code> interface into
+  <code>mockClient</code>, then implement only <code>MethodF</code>
+  from the interface because that is the only one
+  <code>YourClient</code> uses. If somewhere in the code some other
+  method on the interface is in use without your knowledge and you
+  don't implement it on <code>mockClient</code>, you will get a
+  panic. A good thing. Then you just add that one. Test won't
+  silently pass.</p>
+  <pre>
 package main
 
 import (
-	"testing"
+        "testing"
 )
 
 // somewhere in the imported library.go
 
 type LargeExternalClient interface {
-	MethodA()
-	MethodB()
-	MethodC()
-	MethodD()
-	MethodE()
-	MethodF() int
-	MethodG()
-	MethodH()
-	MethodI()
+        MethodA()
+        MethodB()
+        MethodC()
+        MethodD()
+        MethodE()
+        MethodF() int
+        MethodG()
+        MethodH()
+        MethodI()
 }
 
 // code.go
 type YourClient struct {
-	cli LargeExternalClient
+        cli LargeExternalClient
 }
 
 func (y YourClient) Foo() int {
-	return y.cli.MethodF()
+        return y.cli.MethodF()
 }
 
 // code_test.go
 
 type mockClient struct {
-	LargeExternalClient
+        LargeExternalClient
 }
 
 func (mockClient) MethodF() int {
-	return 23
+        return 23
 }
 
 func TestYourClient(t *testing.T) {
-	y := YourClient{
-		cli: new(mockClient),
-	}
+        y := YourClient{
+                cli: new(mockClient),
+        }
 
-	if y.Foo() != 23 {
-		t.Fail()
-	}
+        if y.Foo() != 23 {
+                t.Fail()
+        }
 }
 
 </pre>
-
-<p>
-	Playground link <a href="https://play.golang.org/p/YqlBS6oRME8">https://play.golang.org/p/YqlBS6oRME8</a>
-</p>
-
-<h3> References </h3>
-
-[1] Embedding in Go: Part 3 - interfaces in structs <a
-        href="https://eli.thegreenplace.net/2020/embedding-in-go-part-3-interfaces-in-structs/">https://eli.thegreenplace.net/2020/embedding-in-go-part-3-interfaces-in-structs/</a>
-
-
+  <p>Playground link <a href=
+  "https://play.golang.org/p/YqlBS6oRME8">https://play.golang.org/p/YqlBS6oRME8</a></p>
+  <h3>References</h3>[1] Embedding in Go: Part 3 - interfaces in
+  structs <a href=
+  "https://eli.thegreenplace.net/2020/embedding-in-go-part-3-interfaces-in-structs/">
+  https://eli.thegreenplace.net/2020/embedding-in-go-part-3-interfaces-in-structs/</a>
 </body>
 </html>
-
-
