@@ -7,6 +7,10 @@ window.wander = {
   pages: [
     'https://midnight.pub/',
     'https://susam.net/',
-    'https://susam.net/fizz-buzz-with-cosines.html'
+    'https://susam.net/fizz-buzz-with-cosines.html',
+    'https://jacobharr.is/',
+    'https://norvig.com/',
+    'https://lamport.org/',
+    'https://mrwonko.de/',
   ],
 }
