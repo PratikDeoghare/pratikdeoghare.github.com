@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="generator" content=
-  "HTML Tidy for HTML5 for Linux version 5.8.0">
-  <meta charset="utf-8">
-  <meta name="viewport" content=
-  "width=device-width, initial-scale=1">
-  <title>Iterating over a trie with channels and goroutines</title>
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.8.0">
+<meta charset="utf-8">
+<meta name="viewport" content=
+"width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<title>Iterating over a Trie with Channels and Goroutines</title>
 </head>
 <body>
-  <h2>Iterating over a trie with channels and goroutines</h2>
-  <p>We have a trie that stores set of integer slices. We want an
-  iterator over its items.</p>
-  <p>What we do here is have one goroutine to walk over the trie
-  and send the items over channel. Other goroutine pulls the items
-  from the channel and prints them out.</p>
-  <p>My mental image of this is one gopher jumping around a tree
-  and throwing mangoes back at his friend on the ground.</p>
-  <p>This doesn't have to be a tree or trie. We can iterate over
-  any structure like this. Golang makes it easy to think about such
-  things.</p>
-  <p><b>Note:</b> This has been suggested before and there are some
-  problems with it as pointed out <a href=
-  "https://github.com/golang/go/issues/43557#issuecomment-755784044">
-  here</a>. In this post however I only wanted demonstrate this
-  interesting way of thinking and not worry about performance and
-  other issues.</p>
-  <pre>
-// goroutine that sends the items over the channel
+<article>
+<h1>Iterating over a Trie with Channels and Goroutines</h1>
+<p class="subtitle">Pratik Deoghare</p>
+<section>
+<p>We have a trie that stores set of integer slices. We want an
+iterator over its items.</p>
+<p>What we do here is have one goroutine to walk over the trie and
+send the items over channel. Other goroutine pulls the items from
+the channel and prints them out.</p>
+<p>My mental image of this is one gopher jumping around a tree and
+sending mangoes back at his friend on the ground via a pipe.</p>
+<p>This doesn't have to be a tree or trie. We can iterate over any
+structure like this. Golang makes it easy to think about such
+things.</p>
+<p><strong>Note:</strong> This has been suggested before and there
+are some problems with it as pointed out <a href=
+"https://github.com/golang/go/issues/43557#issuecomment-755784044">here</a>.
+In this post however I only wanted demonstrate this interesting way
+of thinking and not worry about performance and other issues.</p>
+</section>
+<section>
+<pre><code>// goroutine that sends the items over the channel
 
 func (t setSliceInt) Iter() chan []int {
         ch := make(chan []int)
@@ -57,12 +61,12 @@ func (t setSliceInt) iter(acc []int, ch chan []int) &lt;-chan []int {
         for item := range t.Iter() {
                 fmt.Println(item)
         }
-...
-
-</pre>Full code bewlow and <a href=
-"https://play.golang.org/p/QMQJRchVYLY">in the playground.</a>
-  <pre>
-package main
+...</code></pre></section>
+<section>
+<h2>Full Code</h2>
+<p><a href="https://play.golang.org/p/QMQJRchVYLY">Playground
+link</a></p>
+<pre><code>package main
 
 import (
         "fmt"
@@ -178,8 +182,7 @@ func main() {
                 fmt.Println(item)
         }
 
-}
-
-</pre>
+}</code></pre></section>
+</article>
 </body>
 </html>

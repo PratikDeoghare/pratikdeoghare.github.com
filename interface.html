@@ -1,41 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="generator" content=
-  "HTML Tidy for HTML5 for Linux version 5.8.0">
-  <meta charset="utf-8">
-  <meta name="viewport" content=
-  "width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
-  <title>Simplify Testing by Embedding Interfaces</title>
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.8.0">
+<meta charset="utf-8">
+<meta name="viewport" content=
+"width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<title>Simplify Testing by Embedding Interfaces</title>
 </head>
 <body>
-  <h2>Simplify Testing by Embedding Interfaces</h2>
-  <div>
-    <p>We can embed an interface inside a struct in Go.</p>
-  </div>
-  <div>
-    <p>I don’t remember what I was doing at the time—probably
-    writing tests. Then, out of nowhere, I realized I could embed
-    an interface inside a struct and implement only the methods I
-    needed.</p>This is a neat little trick. I wonder why it isn't
-    more widely used.
-  </div>
-  <div>
-    <p>We embed the <code>LargeExternalClient</code> interface into
+<article>
+<h1>Simplify Testing by Embedding Interfaces</h1>
+<p class="subtitle">Pratik Deoghare</p>
+<p>We can embed an interface inside a struct in Go.</p>
+<p>We embed the <code>LargeExternalClient</code> interface into
     mockClient, then implement only <code>MethodF</code>, because
     that’s the only method <code>YourClient</code> actually
     uses.</p>
-    <p>If somewhere in the code, some other method on the interface
-    is in use without our knowledge and we forget to implement it
-    on the <code>mockClient</code>, the test will panic. This is
-    actually a good thing: we can add the missing method, and the
-    test will fail loudly instead of silently passing.</p>
-  </div>
-  <div>
-    <div>
-      <pre>
-package main
+<p>If somewhere in the code, some other method on the interface is
+in use without our knowledge and we forget to implement it on the
+<code>mockClient</code>, the test will panic. This is actually a
+good thing: we can add the missing method, and the test will fail
+loudly instead of silently passing.</p>
+<h2>Example</h2>
+<pre><code>package main
 
 import (
         "testing"
@@ -82,18 +71,16 @@ func TestYourClient(t *testing.T) {
         if y.Foo() != 23 {
                 t.Fail()
         }
-}
+}</code></pre>
 
-</pre>
-    </div>
-    <div>
-      <p>You can try <a href=
-      "https://play.golang.org/p/YqlBS6oRME8">this example in the
-      Go Playground</a>, and read more about interface embedding at
-      <a href=
-      "https://eli.thegreenplace.net/2020/embedding-in-go-part-3-interfaces-in-structs/">
-      eli.thegreenplace.net</a>.</p>
-    </div>
-  </div>
+<p>I think this is a nicer way of writing tests than generating all the method mocks using
+something like <a href="https://github.com/golang/mock">gomock</a>. </p>
+
+<p>You can try <a href="https://play.golang.org/p/YqlBS6oRME8">this
+example in the Go Playground</a>, and read more about interface
+embedding at <a href=
+"https://eli.thegreenplace.net/2020/embedding-in-go-part-3-interfaces-in-structs/">
+eli.thegreenplace.net</a>.</p>
+</article>
 </body>
 </html>

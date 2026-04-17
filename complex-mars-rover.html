@@ -1,100 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="generator" content=
-  "HTML Tidy for HTML5 for Linux version 5.8.0">
-  <meta charset="utf-8">
-  <meta name="viewport" content=
-  "width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
-  <title>Complex Numbers and the Mars Rover Challenge</title>
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.8.0">
+<meta charset="utf-8">
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content=
+"width=device-width, initial-scale=1">
+<title>Complex Numbers and the Mars Rover Challenge</title>
+<script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      }
+    };
+</script>
+<script src=
+"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-  <div>
-    <h2>Complex Numbers and the Mars Rover Challenge</h2>
-  </div>
-  <div>
-    <p>Here is how to solve <a href=
-    "https://code.google.com/archive/p/marsrovertechchallenge/">the
-    Mars Rover Challenge</a> using complex numbers.</p>
-    <p>In the calculations below, j is √(-1).</p>
-    <p>Complex multiplication represents rotation, and complex
-    addition represents translation.</p>
-  </div>
-  <div>
-    <p>Mapping of headings:</p>
-    <table>
-      <tr>
-        <td>North</td>
-        <td>j</td>
-      </tr>
-      <tr>
-        <td>East</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>West</td>
-        <td>-1</td>
-      </tr>
-      <tr>
-        <td>South</td>
-        <td>-j</td>
-      </tr>
-    </table>
-  </div>
-  <div>
-    <p>Mapping of the rover commands:</p>
-    <table border="1px solid black" border-collapse="collapse">
-      <tr>
-        <td>L</td>
-        <td>Rotate left by 90 degrees</td>
-        <td>Multiply the heading by j</td>
-      </tr>
-      <tr>
-        <td>R</td>
-        <td>Rotate right by 90 degrees</td>
-        <td>Multiply the heading by -j</td>
-      </tr>
-      <tr>
-        <td>M</td>
-        <td>Move forward</td>
-        <td>Add the heading to the position</td>
-      </tr>
-    </table>
-  </div>
-  <div>
-    Example 1:
-    <p>A rover is facing North and we issue an <code>R</code>
-    (rotate right) command. We expect it to face East. We multiply
-    the heading by <code>-j</code>, which corresponds to the
-    <code>R</code> command.</p>
-    <pre>
+<article>
+<h1>Complex Numbers and the Mars Rover Challenge</h1>
+<p class="subtitle">Pratik Deoghare</p>
+<section>
+<p>Here is how to solve <a href=
+"https://code.google.com/archive/p/marsrovertechchallenge/">the
+Mars Rover Challenge</a> using complex numbers. In the calculations
+below, j is \( \sqrt{-1} \). Complex multiplication represents rotation, and
+complex addition represents translation.</p>
+</section>
+<section>
+<h2>Mapping of Headings</h2>
+<table>
+<tr>
+<td>North</td>
+<td>j</td>
+</tr>
+<tr>
+<td>East</td>
+<td>1</td>
+</tr>
+<tr>
+<td>West</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>South</td>
+<td>-j</td>
+</tr>
+</table>
+</section>
+<section>
+<h2>Mapping of the Rover Commands</h2>
+<table>
+<tr>
+<td>L</td>
+<td>Rotate left by 90 degrees</td>
+<td>Multiply the heading by j</td>
+</tr>
+<tr>
+<td>R</td>
+<td>Rotate right by 90 degrees</td>
+<td>Multiply the heading by -j</td>
+</tr>
+<tr>
+<td>M</td>
+<td>Move forward</td>
+<td>Add the heading to the position</td>
+</tr>
+</table>
+</section>
+<section>
+<h2>Example 1</h2>
+<p>A rover is facing North and we issue an <code>R</code> (rotate
+right) command. We expect it to face East. We multiply the heading
+by <code>-j</code>, which corresponds to the <code>R</code>
+command.</p>
+<pre><code>
         North * R
         = j * -j
         = 1
         = East // position unchanged
-      </pre>
-  </div>
-  <div>
-    Example 2:
-    <p>A rover is at <code>(1,2)</code> facing East and we issue an
-    <code>M</code> (move forward) command. We expect it to be at
-    <code>(2,2)</code>. We add the heading East to the
-    position.</p>
-    <pre>
+      </code></pre></section>
+<section>
+<h2>Example 2</h2>
+<p>A rover is at <code>(1,2)</code> facing East and we issue an
+<code>M</code> (move forward) command. We expect it to be at
+<code>(2,2)</code>. We add the heading East to the position.</p>
+<pre><code>
         rover position (1,2) + East
         = (1 + 2j) + 1
         = 2 + 2j
         = (2, 2) // orientation unchanged
-    </pre>
-  </div>
-  <div>
-    <p><a href=
-    "https://github.com/pratikdeoghare/mars-rover-problem">In the
-    golang implementation</a>, position and orientation are
-    represented as complex numbers using a custom vect type. The
-    built-in complex type is not used because it relies on floats,
-    which can’t be compared easily.</p>
-  </div>
+    </code></pre></section>
+<section>
+<h2>Implementation Notes</h2>
+<p><a href=
+"https://github.com/pratikdeoghare/mars-rover-problem">In the
+golang implementation</a>, position and orientation are represented
+as complex numbers using a custom vect type. The built-in complex
+type is not used because it relies on floats, which can’t be
+compared easily.</p>
+</section>
+</article>
 </body>
 </html>

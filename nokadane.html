@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.8.0">
+<meta charset="utf-8">
+<meta name="viewport" content=
+"width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<title>Maximum Sum Subarray in O(n) without Kadane's
+Algorithm</title>
+
+<script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      }
+    };
+</script>
+<script src=
+"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<article>
+<h1>Maximum Subarray Sum</h1>
+<p class="subtitle">Pratik Deoghare</p>
+<p>Given an array \(A\) of length \(n\), construct a directed graph
+as follows.</p>
+<figure><img src="nokadane_cream.png" width="500" alt=
+"Graph construction for maximum subarray sum"></figure>
+<h2>Graph Construction</h2>
+<h3>Add vertices</h3>
+<ul>
+<li>Add special vertices <code>src</code>, <code>sink</code>.</li>
+<li>Add one vertex \(v_i\) for each \(A_i\).</li>
+</ul>
+\[ V := \{\text{src}, \text{sink}\} \cup \{v_i \text{ for } 1 \leq
+i \leq n\} \]
+<h3>Add edges</h3>
+<ul>
+<li>Add edge of weight 0 from <code>src</code> to each
+\(v_i\).</li>
+<li>Add edge of weight \(-A[i]\) from \(v_i\) to
+<code>sink</code>.</li>
+<li>Add edge of weight \(-A[i]\) from \(v_i\) to \(v_{i+1}\).</li>
+</ul>
+\[ E := \{(\text{src}, v_i, 0)\} \cup \{(v_i, \text{sink}, -A[i])\}
+\cup \{(v_i, v_{i+1}, -A[i])\} \]
+<p>We find shortest path from <code>src</code> to
+<code>sink</code>. \(-1\) times cost of that path is our
+answer.</p>
+<h2>Implementation</h2>
+<p>Now, you might be thinking Kadane's algorithm is just a few
+lines and this one will need a lot of code. Let me show you how
+little code is needed.</p>
+<p>This is a DAG so we can find the shortest path by relaxing edges
+going out of vertices in topological order. We don't need to
+implement topological sort because we already know the order i.e.
+<code>sink</code>, \(v_n\), \(v_{n-1}\), …, \(v_0\),
+<code>src</code>.</p>
+<pre><code>Max-Subarray-Sum(A)
+1  d[v] = 0 for v ∈ V
+2  d[vₙ] = -A[n]
+3  for vᵢ = vₙ₋₁, ..., v₁, src
+4       for v ∈ Adj[vᵢ]
+5            RELAX(vᵢ, v, weight(vᵢ, v))
+6  return -min{d[v] for v ∈ V}</code></pre>
+<p>We know there are only two outgoing edges from the vertices
+being relaxed. We replace RELAX by its implementation for each of
+those edges to get the code below.</p>
+<h3>Substitute adjacent vertices</h3>
+<pre><code>Max-Subarray-Sum(A)
+1  d[v] = 0 for v ∈ V
+2  d[vₙ] = -A[n]
+3  for vᵢ = vₙ₋₁, ..., v₁, src
+4       RELAX(vᵢ, vᵢ₊₁, weight(vᵢ, vᵢ₊₁))
+5       RELAX(vᵢ, sink, weight(vᵢ, sink))
+6  return -min{d[v] for v ∈ V}</code></pre>
+<h3>Substitute weights</h3>
+<pre><code>Max-Subarray-Sum(A)
+1  d[v] = 0 for v ∈ V
+2  d[vₙ] = -A[n]
+3  for vᵢ = vₙ₋₁, ..., v₁, src
+4       RELAX(vᵢ, vᵢ₊₁, -A[i])
+5       RELAX(vᵢ, sink, -A[i])
+6  return -min{d[v] for v ∈ V}</code></pre>
+<h3>Substitute implementation of RELAX</h3>
+<pre><code>Max-Subarray-Sum(A)
+1  d[v] = 0 for v ∈ V
+2  d[vₙ] = -A[n]
+3  for vᵢ = vₙ₋₁, ..., v₁, src
+4       d[vᵢ] = min(d[vᵢ], d[vᵢ₊₁] - A[i])
+5       d[vᵢ] = min(d[vᵢ], d[sink] - A[i])
+6  return -min{d[v] for v ∈ V}</code></pre>
+<p>This in turn is equivalent to the following final code since
+\(d[\text{sink}] = 0\).</p>
+<pre><code>Max-Subarray-Sum(A)
+1  d[v] = 0 for v ∈ V
+2  d[vₙ] = -A[n]
+3  for vᵢ = vₙ₋₁, ..., v₁, src
+4       d[vᵢ] = min(-A[i], d[vᵢ₊₁] - A[i])
+5  return -min{d[v] for v ∈ V}</code></pre>
+<section>
+<h2>Go Implementation</h2>
+<pre><code>func maxSubarraySum(A []int) int {
+    n := len(A)
+    d := make([]int, n)
+    d[n-1] = -A[n-1]
+    for i := n-2; i &gt;= 0; i-- {
+        d[i] = min(-A[i], -A[i] + d[i+1])
+    }
+    return -slices.Min(d)
+}</code></pre>
+<p>We could maintain the global min while looping instead of
+computing it at the end using <code>slices.Min</code>.</p>
+<pre><code>func maxSubarraySum(A []int) int {
+    n := len(A)
+    d := make([]int, n)
+
+    d[n-1] = -A[n-1]
+    minn := d[n-1]
+    for i := n-2; i &gt;= 0; i-- {
+        d[i] = min(-A[i], -A[i] + d[i+1])
+        minn = min(minn, d[i])
+    }
+    return -minn
+}</code></pre>
+<p>Looks exactly like Kadane's algorithm, doesn't it?</p>
+</section>
+</article>
+</body>
+</html>
