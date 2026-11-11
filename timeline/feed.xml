@@ -2,11 +2,20 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Pratik Deoghare: thoughts</title>
   <id>https://pratik.deoghare.com/timeline/</id>
-  <updated>2026-11-11T18:59:10+01:00</updated>
+  <updated>2026-11-11T00:00:00+01:00</updated>
   <link href="https://pratik.deoghare.com/timeline/feed.xml" rel="self" type="application/atom+xml"></link>
   <link href="https://pratik.deoghare.com/timeline/" rel="alternate" type="text/html"></link>
   <author>
     <name>Pratik Deoghare</name>
   </author>
   <generator>barkdown</generator>
+  <entry>
+    <title>On LLMs, 11 November 2026</title>
+    <id>https://pratik.deoghare.com/llm.html#t-2026-11-11</id>
+    <published>2026-11-11T00:00:00+01:00</published>
+    <updated>2026-11-11T00:00:00+01:00</updated>
+    <link href="https://pratik.deoghare.com/llm.html#t-2026-11-11" rel="alternate" type="text/html"></link>
+    <summary type="text">This is no longer strictly true. I have started using Claude for my personal projects too. There are too many projects that I want to see done and I don&#39;t…</summary>
+    <content type="html" xml:base="https://pratik.deoghare.com/llm.html">&lt;p&gt;This is no longer strictly true. I have started using Claude for my personal&#xA;  projects too. There are too many projects that I want to see done and I don&amp;#39;t &#xA;  think I can do them all by myself so Claude acts as midwife. Once I learn &#xA;  what I want to learn by doing some project I give it to Claude. This ofcourse&#xA;  prevents me from learning things I didn&amp;#39;t even know the project was going &#xA;  to teach me.&lt;/p&gt;&#xA;</content>
+  </entry>
 </feed>
