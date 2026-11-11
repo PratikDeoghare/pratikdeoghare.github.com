@@ -1,64 +1,99 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta name="generator" content=
-            "HTML Tidy for HTML5 for Linux version 5.8.0">
-    <meta charset="utf-8">
-      
-        
-        
-    
-		<link rel="stylesheet" href="style.css" type="text/css">
-	<meta name="viewport" content=
-            "width=device-width, initial-scale=1">
-    <title>A Generic Red-Black Tree Implementation in Golang</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Generic Red-Black Tree Implementation in Golang, Pratik Deoghare</title>
+<meta name="description" content="To balance the tree CLRS implementation rotates the subtrees. The functional implementations rewrites the tree. Thinking in terms of rewriting instead of rotating feels like looking at the problem in…">
+<meta name="generator" content="barkdown">
+<meta name="theme-color" content="#fffff8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151515" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://pratik.deoghare.com/go2redblack.html">
+<link rel="alternate" type="application/atom+xml" title="Pratik Deoghare" href="/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Pratik Deoghare (RSS)" href="/rss.xml">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+@font-face { font-family: "et-book"; src: url("https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff") format("woff"); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: "et-book"; src: url("https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff") format("woff"); font-weight: normal; font-style: italic; font-display: swap; }
+@font-face { font-family: "et-book"; src: url("https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff"); font-weight: bold; font-style: normal; font-display: swap; }
+</style>
+<link rel="stylesheet" href="/assets/style.css?v=674200dc">
+<meta property="og:site_name" content="Pratik Deoghare">
+<meta property="og:title" content="A Generic Red-Black Tree Implementation in Golang">
+<meta property="og:description" content="To balance the tree CLRS implementation rotates the subtrees. The functional implementations rewrites the tree. Thinking in terms of rewriting instead of rotating feels like looking at the problem in…">
+<meta property="og:url" content="https://pratik.deoghare.com/go2redblack.html">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-11-26T08:47:00&#43;01:00">
+<meta property="article:tag" content="data-structure">
+<meta property="article:tag" content="generics">
+<meta property="article:tag" content="golang">
+<meta property="article:tag" content="implementation">
+<meta property="article:tag" content="functional-programming">
+<meta name="twitter:card" content="summary">
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 </head>
-<body>
+<body class="kind-post">
+<a class="skip" href="#main">Skip to the writing</a>
+<header class="masthead">
+<div class="wrap">
+<p class="brand"><a href="/">Pratik Deoghare</a></p>
+<p class="tagline">Welcome to my website!</p>
+<nav class="menu" aria-label="Site">
+<a href="/">Home</a>
+<a href="/about/">About</a>
+<a href="/archive/">Archive</a>
+<a href="/tags/">Tags</a>
+<a href="/search/">Search</a>
+<button class="lamp" type="button">Dim the lamp</button>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
 
-    <h1>A Generic Red-Black Tree Implementation in Golang</h1>
-    <p>To balance the tree CLRS implementation <em>rotates</em> the
-        subtrees. The functional implementations <em>rewrites</em> the
-        tree. Thinking in terms of rewriting instead of rotating feels like
-        looking at the problem in a proper coordinate system. My
-        implementation here is translation of Matt Might's Haskell code in
-        Go.</p>
-    <p>The generics syntax is easy on eyes. I like it.</p>
-    <h2>References</h2>
-    <ol>
-        <li><a href="http://matt.might.net/articles/red-black-delete/">The
-            missing method: Deleting from Okasaki's red-black trees by Matt
-            Might</a></li>
-        <li><a href=
-                       "https://www.cs.tufts.edu/~nr/cs257/archive/chris-okasaki/redblack99.pdf">
-            Red-Black Trees in a Functional Setting by Okasaki</a></li>
-        <li><a href="https://blog.golang.org/generics-next-step">The Next
-            Step for Generics by Ian Lance Taylor and Robert Griesemer</a></li>
-    </ol>
-    <h2>Code</h2>
-    <p><a href="https://go2goplay.golang.org/p/3Jmkjh5RHFs">Playground
-        link</a></p>
-    <pre>
-// A generic red-black tree implementation from the
-// functional implementation by Matt Might[1] and Okasaki.
-//
-// [1] http://matt.might.net/articles/red-black-delete/
-//
-// Author: Pratik Deoghare
+<article class="post">
+<header class="post-header">
+<h1>A Generic Red-Black Tree Implementation in Golang</h1>
+
+<p class="meta"><time datetime="2020-11-26">26 November 2020</time>. About 6 minutes to read.</p>
+</header>
+<div class="content">
+<p>To balance the tree CLRS implementation <em>rotates</em> the
+subtrees. The functional implementations <em>rewrites</em> the
+tree. Thinking in terms of rewriting instead of rotating feels like
+looking at the problem in a proper coordinate system. My
+implementation here is translation of Matt Might&#39;s Haskell code in
+Go.</p>
+<p>The generics syntax is easy on eyes. I like it.</p>
+<h2 id="references">References <a class="anchor" href="#references" aria-label="Link to this section">#</a></h2>
+<ol>
+<li><a href="http://matt.might.net/articles/red-black-delete/" class="external" rel="noopener">The missing method: Deleting from Okasaki&#39;s red-black trees by Matt Might</a></li>
+<li><a href="https://www.cs.tufts.edu/~nr/cs257/archive/chris-okasaki/redblack99.pdf" class="external" rel="noopener">Red-Black Trees in a Functional Setting by Okasaki</a></li>
+<li><a href="https://blog.golang.org/generics-next-step" class="external" rel="noopener">The Next Step for Generics by Ian Lance Taylor and Robert Griesemer</a></li>
+</ol>
+<h2 id="code">Code <a class="anchor" href="#code" aria-label="Link to this section">#</a></h2>
+<p><a href="https://go2goplay.golang.org/p/3Jmkjh5RHFs" class="external" rel="noopener">Playground
+link</a></p>
+<div class="codeblock"><div class="code-head"><span class="lang">go</span></div><pre><code class="language-go"><span class="tok-c">// A generic red-black tree implementation from the</span>
+<span class="tok-c">// functional implementation by Matt Might[1] and Okasaki.</span>
+<span class="tok-c">//</span>
+<span class="tok-c">// [1] http://matt.might.net/articles/red-black-delete/</span>
+<span class="tok-c">//</span>
+<span class="tok-c">// Author: Pratik Deoghare</span>
 
 
-package main
+<span class="tok-k">package</span> main
 
-import (
-        "fmt"
+<span class="tok-k">import</span> (
+        <span class="tok-s">&#34;fmt&#34;</span>
 )
 
-type Map[K, V any] interface {
-        Get(key K) (value V, ok bool)
-        Set(key K, value V)
-        Delete(key K)
+<span class="tok-k">type</span> Map[K, V <span class="tok-b">any</span>] <span class="tok-k">interface</span> {
+        <span class="tok-f">Get</span>(key K) (value V, ok <span class="tok-b">bool</span>)
+        <span class="tok-f">Set</span>(key K, value V)
+        <span class="tok-f">Delete</span>(key K)
 }
 
-func New[K, V any](less func(K, K) bool) Map[K, V] {
+<span class="tok-k">func</span> New[K, V <span class="tok-b">any</span>](less <span class="tok-k">func</span>(K, K) <span class="tok-b">bool</span>) Map[K, V] {
         leaf := &amp;node[K, V]{
                 color: B,
         }
@@ -69,7 +104,7 @@ func New[K, V any](less func(K, K) bool) Map[K, V] {
         }
         bbleaf.a = leaf
         bbleaf.b = leaf
-        return &amp;rbmap[K, V]{
+        <span class="tok-k">return</span> &amp;rbmap[K, V]{
                 less:   less,
                 leaf:   leaf,
                 bbleaf: bbleaf,
@@ -77,74 +112,74 @@ func New[K, V any](less func(K, K) bool) Map[K, V] {
         }
 }
 
-type color uint8
+<span class="tok-k">type</span> color <span class="tok-b">uint8</span>
 
-const (
-        R  color = 0
-        B  color = 1
-        BB color = 2
-        NB color = 3
+<span class="tok-k">const</span> (
+        R  color = <span class="tok-n">0</span>
+        B  color = <span class="tok-n">1</span>
+        BB color = <span class="tok-n">2</span>
+        NB color = <span class="tok-n">3</span>
 )
 
-type node[K, V any] struct {
+<span class="tok-k">type</span> node[K, V <span class="tok-b">any</span>] <span class="tok-k">struct</span> {
         color color
         key   K
         value V
         a     *node[K, V]
         b     *node[K, V]
 }
-type rbmap[K, V any] struct {
+<span class="tok-k">type</span> rbmap[K, V <span class="tok-b">any</span>] <span class="tok-k">struct</span> {
         root   *node[K, V]
-        leaf   *node[K, V] // the leaf always Black. We don't touch it. Its a sacred leaf.
-        bbleaf *node[K, V] // this is used for deletion
-        less   func(K, K) bool
+        leaf   *node[K, V] <span class="tok-c">// the leaf always Black. We don&#39;t touch it. Its a sacred leaf.</span>
+        bbleaf *node[K, V] <span class="tok-c">// this is used for deletion</span>
+        less   <span class="tok-k">func</span>(K, K) <span class="tok-b">bool</span>
 }
 
-func (r rbmap[K, V]) Preorder() {
-        r.preorder(r.root, "")
+<span class="tok-k">func</span> (r rbmap[K, V]) <span class="tok-f">Preorder</span>() {
+        r.<span class="tok-f">preorder</span>(r.root, <span class="tok-s">&#34;&#34;</span>)
 }
-func (r rbmap[K, V]) preorder(n *node[K, V], tab string) {
-        if n == r.leaf {
-                return
+<span class="tok-k">func</span> (r rbmap[K, V]) <span class="tok-f">preorder</span>(n *node[K, V], tab <span class="tok-b">string</span>) {
+        <span class="tok-k">if</span> n == r.leaf {
+                <span class="tok-k">return</span>
         }
-        fmt.Println(tab, n.key, "=&gt;", n.value, n.color)
-        r.preorder(n.a, ":"+tab)
-        r.preorder(n.b, ":"+tab)
+        fmt.<span class="tok-f">Println</span>(tab, n.key, <span class="tok-s">&#34;=&gt;&#34;</span>, n.value, n.color)
+        r.<span class="tok-f">preorder</span>(n.a, <span class="tok-s">&#34;:&#34;</span>+tab)
+        r.<span class="tok-f">preorder</span>(n.b, <span class="tok-s">&#34;:&#34;</span>+tab)
 }
-func (r rbmap[K, V]) Inorder() {
-        panic("implement me")
+<span class="tok-k">func</span> (r rbmap[K, V]) <span class="tok-f">Inorder</span>() {
+        <span class="tok-b">panic</span>(<span class="tok-s">&#34;implement me&#34;</span>)
 }
-func (r rbmap[K, V]) Get(key K) (value V, ok bool) {
+<span class="tok-k">func</span> (r rbmap[K, V]) <span class="tok-f">Get</span>(key K) (value V, ok <span class="tok-b">bool</span>) {
         n := r.root
-        for n != r.leaf {
-                if r.less(key, n.key) {
+        <span class="tok-k">for</span> n != r.leaf {
+                <span class="tok-k">if</span> r.<span class="tok-f">less</span>(key, n.key) {
                         n = n.a
-                } else if r.less(n.key, key) {
+                } <span class="tok-k">else</span> <span class="tok-k">if</span> r.<span class="tok-f">less</span>(n.key, key) {
                         n = n.b
-                } else {
-                        return n.value, true
+                } <span class="tok-k">else</span> {
+                        <span class="tok-k">return</span> n.value, <span class="tok-b">true</span>
                 }
         }
-        return Nil[V](), false
+        <span class="tok-k">return</span> Nil[V](), <span class="tok-b">false</span>
 }
-func Nil[T any]() T {
-        var zero T
-        return zero
+<span class="tok-k">func</span> Nil[T <span class="tok-b">any</span>]() T {
+        <span class="tok-k">var</span> zero T
+        <span class="tok-k">return</span> zero
 }
-func (r *rbmap[K, V]) Set(key K, value V) {
-        r.root = blacken(r.insert(r.root, key, value))
+<span class="tok-k">func</span> (r *rbmap[K, V]) <span class="tok-f">Set</span>(key K, value V) {
+        r.root = <span class="tok-f">blacken</span>(r.<span class="tok-f">insert</span>(r.root, key, value))
 }
-func blacken[K, V any](n *node[K, V]) *node[K, V] {
+<span class="tok-k">func</span> blacken[K, V <span class="tok-b">any</span>](n *node[K, V]) *node[K, V] {
         n.color = B
-        return n
+        <span class="tok-k">return</span> n
 }
-func redden[K, V any](n *node[K, V]) *node[K, V] {
+<span class="tok-k">func</span> redden[K, V <span class="tok-b">any</span>](n *node[K, V]) *node[K, V] {
         n.color = R
-        return n
+        <span class="tok-k">return</span> n
 }
-func (r *rbmap[K, V]) insert(n *node[K, V], key K, value V) *node[K, V] {
-        if n == r.leaf {
-                return &amp;node[K, V]{
+<span class="tok-k">func</span> (r *rbmap[K, V]) <span class="tok-f">insert</span>(n *node[K, V], key K, value V) *node[K, V] {
+        <span class="tok-k">if</span> n == r.leaf {
+                <span class="tok-k">return</span> &amp;node[K, V]{
                         color: R,
                         key:   key,
                         value: value,
@@ -152,253 +187,275 @@ func (r *rbmap[K, V]) insert(n *node[K, V], key K, value V) *node[K, V] {
                         b:     r.leaf,
                 }
         }
-        if r.less(key, n.key) {
-                n.a = r.insert(n.a, key, value)
-                n = balance(n)
-        } else if r.less(n.key, key) {
-                n.b = r.insert(n.b, key, value)
-                n = balance(n)
-        } else {
+        <span class="tok-k">if</span> r.<span class="tok-f">less</span>(key, n.key) {
+                n.a = r.<span class="tok-f">insert</span>(n.a, key, value)
+                n = <span class="tok-f">balance</span>(n)
+        } <span class="tok-k">else</span> <span class="tok-k">if</span> r.<span class="tok-f">less</span>(n.key, key) {
+                n.b = r.<span class="tok-f">insert</span>(n.b, key, value)
+                n = <span class="tok-f">balance</span>(n)
+        } <span class="tok-k">else</span> {
                 n.value = value
         }
-        return n
+        <span class="tok-k">return</span> n
 }
-func colors[K, V any](n1, n2, n3 *node[K, V], c1, c2, c3 color) bool {
-        return n1.color == c1 &amp;& n2.color == c2 &amp;& n3.color == c3
+<span class="tok-k">func</span> colors[K, V <span class="tok-b">any</span>](n1, n2, n3 *node[K, V], c1, c2, c3 color) <span class="tok-b">bool</span> {
+        <span class="tok-k">return</span> n1.color == c1 &amp;&amp; n2.color == c2 &amp;&amp; n3.color == c3
 }
-func balance[K, V any](n *node[K, V]) *node[K, V] {
-        var x, y, z *node[K, V]
-        var a, b, c, d *node[K, V]
-        okasakiCase := false
-        switch {
-        case colors(n, n.a, n.a.a, B, R, R):
+<span class="tok-k">func</span> balance[K, V <span class="tok-b">any</span>](n *node[K, V]) *node[K, V] {
+        <span class="tok-k">var</span> x, y, z *node[K, V]
+        <span class="tok-k">var</span> a, b, c, d *node[K, V]
+        okasakiCase := <span class="tok-b">false</span>
+        <span class="tok-k">switch</span> {
+        <span class="tok-k">case</span> <span class="tok-f">colors</span>(n, n.a, n.a.a, B, R, R):
                 x, y, z = n.a.a, n.a, n
                 a, b, c, d = x.a, x.b, y.b, z.b
-                okasakiCase = true
-        case colors(n, n.a, n.a.b, B, R, R):
+                okasakiCase = <span class="tok-b">true</span>
+        <span class="tok-k">case</span> <span class="tok-f">colors</span>(n, n.a, n.a.b, B, R, R):
                 x, y, z = n.a, n.a.b, n
                 a, b, c, d = x.a, y.a, y.b, z.b
-                okasakiCase = true
-        case colors(n, n.b, n.b.a, B, R, R):
+                okasakiCase = <span class="tok-b">true</span>
+        <span class="tok-k">case</span> <span class="tok-f">colors</span>(n, n.b, n.b.a, B, R, R):
                 x, y, z = n, n.b.a, n.b
                 a, b, c, d = x.a, y.a, y.b, z.b
-                okasakiCase = true
-        case colors(n, n.b, n.b.b, B, R, R):
+                okasakiCase = <span class="tok-b">true</span>
+        <span class="tok-k">case</span> <span class="tok-f">colors</span>(n, n.b, n.b.b, B, R, R):
                 x, y, z = n, n.b, n.b.b
                 a, b, c, d = x.a, y.a, z.a, z.b
-                okasakiCase = true
+                okasakiCase = <span class="tok-b">true</span>
         }
-        if okasakiCase {
+        <span class="tok-k">if</span> okasakiCase {
                 x.a, x.b, z.a, z.b = a, b, c, d
                 y.a, y.b = x, z
                 x.color, y.color, z.color = B, R, B
-                return y
+                <span class="tok-k">return</span> y
         }
-        mightCase := false
-        switch {
-        case colors(n, n.a, n.a.a, BB, R, R):
+        mightCase := <span class="tok-b">false</span>
+        <span class="tok-k">switch</span> {
+        <span class="tok-k">case</span> <span class="tok-f">colors</span>(n, n.a, n.a.a, BB, R, R):
                 x, y, z = n.a.a, n.a, n
                 a, b, c, d = x.a, x.b, y.b, z.b
-                mightCase = true
-        case colors(n, n.a, n.a.b, BB, R, R):
+                mightCase = <span class="tok-b">true</span>
+        <span class="tok-k">case</span> <span class="tok-f">colors</span>(n, n.a, n.a.b, BB, R, R):
                 x, y, z = n.a, n.a.b, n
                 a, b, c, d = x.a, y.a, y.b, z.b
-                mightCase = true
-        case colors(n, n.b, n.b.a, BB, R, R):
+                mightCase = <span class="tok-b">true</span>
+        <span class="tok-k">case</span> <span class="tok-f">colors</span>(n, n.b, n.b.a, BB, R, R):
                 x, y, z = n, n.b.a, n.b
                 a, b, c, d = x.a, y.a, y.b, z.b
-                mightCase = true
-        case colors(n, n.b, n.b.b, BB, R, R):
+                mightCase = <span class="tok-b">true</span>
+        <span class="tok-k">case</span> <span class="tok-f">colors</span>(n, n.b, n.b.b, BB, R, R):
                 x, y, z = n, n.b, n.b.b
                 a, b, c, d = x.a, y.a, z.a, z.b
-                mightCase = true
-        default:
-                c1, ok := deleteCaseI(n)
-                if ok {
-                        return c1
+                mightCase = <span class="tok-b">true</span>
+        <span class="tok-k">default</span>:
+                c1, ok := <span class="tok-f">deleteCaseI</span>(n)
+                <span class="tok-k">if</span> ok {
+                        <span class="tok-k">return</span> c1
                 }
-                c2, ok := deleteCaseII(n)
-                if ok {
-                        return c2
+                c2, ok := <span class="tok-f">deleteCaseII</span>(n)
+                <span class="tok-k">if</span> ok {
+                        <span class="tok-k">return</span> c2
                 }
         }
-        if mightCase {
+        <span class="tok-k">if</span> mightCase {
                 x.a, x.b, z.a, z.b = a, b, c, d
                 y.a, y.b = x, z
                 x.color, y.color, z.color = B, B, B
-                return y
+                <span class="tok-k">return</span> y
         }
-        return n
+        <span class="tok-k">return</span> n
 }
-func deleteCaseI[K, V any](n *node[K, V]) (*node[K, V], bool) {
-        cond := n.color == BB &amp;& n.b.color == NB &amp;& n.b.a.color == B &amp;& n.b.b.color == B
-        if !cond {
-                return n, false
+<span class="tok-k">func</span> deleteCaseI[K, V <span class="tok-b">any</span>](n *node[K, V]) (*node[K, V], <span class="tok-b">bool</span>) {
+        cond := n.color == BB &amp;&amp; n.b.color == NB &amp;&amp; n.b.a.color == B &amp;&amp; n.b.b.color == B
+        <span class="tok-k">if</span> !cond {
+                <span class="tok-k">return</span> n, <span class="tok-b">false</span>
         }
         x, y, z := n, n.b.a, n.b
         a, b, c, d := x.a, y.a, y.b, z.b
         x.a, x.b = a, b
-        z.a, z.b = c, redden(d)
+        z.a, z.b = c, <span class="tok-f">redden</span>(d)
         z.color = B
-        y.a, y.b = x, balance(z)
+        y.a, y.b = x, <span class="tok-f">balance</span>(z)
         x.color, y.color, z.color = B, B, B
-        return y, true
+        <span class="tok-k">return</span> y, <span class="tok-b">true</span>
 }
-func deleteCaseII[K, V any](n *node[K, V]) (*node[K, V], bool) {
-        cond := n.color == BB &amp;& n.a.color == NB &amp;& n.a.a.color == B &amp;& n.a.b.color == B
-        if !cond {
-                return n, false
+<span class="tok-k">func</span> deleteCaseII[K, V <span class="tok-b">any</span>](n *node[K, V]) (*node[K, V], <span class="tok-b">bool</span>) {
+        cond := n.color == BB &amp;&amp; n.a.color == NB &amp;&amp; n.a.a.color == B &amp;&amp; n.a.b.color == B
+        <span class="tok-k">if</span> !cond {
+                <span class="tok-k">return</span> n, <span class="tok-b">false</span>
         }
         x, y, z := n.a, n.a.b, n
         a, b, c, d := x.a, y.a, y.b, z.b
-        x.a, x.b = redden(a), b
+        x.a, x.b = <span class="tok-f">redden</span>(a), b
         z.a, z.b = c, d
         x.color = B
-        y.a, y.b = balance(x), z
+        y.a, y.b = <span class="tok-f">balance</span>(x), z
         x.color, y.color, z.color = B, B, B
-        return y, true
+        <span class="tok-k">return</span> y, <span class="tok-b">true</span>
 }
-func (r *rbmap[K, V]) Delete(key K) {
-        r.root = blacken(r.del(r.root, key))
+<span class="tok-k">func</span> (r *rbmap[K, V]) <span class="tok-f">Delete</span>(key K) {
+        r.root = <span class="tok-f">blacken</span>(r.<span class="tok-f">del</span>(r.root, key))
 }
-func (r *rbmap[K, V]) del(n *node[K, V], key K) *node[K, V] {
-        if n == r.leaf {
-                return r.leaf
+<span class="tok-k">func</span> (r *rbmap[K, V]) <span class="tok-f">del</span>(n *node[K, V], key K) *node[K, V] {
+        <span class="tok-k">if</span> n == r.leaf {
+                <span class="tok-k">return</span> r.leaf
         }
-        if r.less(key, n.key) {
-                n.a = r.del(n.a, key)
-                n = r.bubble(n)
-        } else if r.less(n.key, key) {
-                n.b = r.del(n.b, key)
-                n = r.bubble(n)
-        } else {
-                return r.remove(n)
+        <span class="tok-k">if</span> r.<span class="tok-f">less</span>(key, n.key) {
+                n.a = r.<span class="tok-f">del</span>(n.a, key)
+                n = r.<span class="tok-f">bubble</span>(n)
+        } <span class="tok-k">else</span> <span class="tok-k">if</span> r.<span class="tok-f">less</span>(n.key, key) {
+                n.b = r.<span class="tok-f">del</span>(n.b, key)
+                n = r.<span class="tok-f">bubble</span>(n)
+        } <span class="tok-k">else</span> {
+                <span class="tok-k">return</span> r.<span class="tok-f">remove</span>(n)
         }
-        return n
+        <span class="tok-k">return</span> n
 }
-func (r *rbmap[K, V]) remove(n *node[K, V]) *node[K, V] {
-        if n == r.leaf {
-                return r.leaf
+<span class="tok-k">func</span> (r *rbmap[K, V]) <span class="tok-f">remove</span>(n *node[K, V]) *node[K, V] {
+        <span class="tok-k">if</span> n == r.leaf {
+                <span class="tok-k">return</span> r.leaf
         }
-        if n.color == R &amp;& n.a == r.leaf &amp;& n.b == r.leaf {
-                return r.leaf
+        <span class="tok-k">if</span> n.color == R &amp;&amp; n.a == r.leaf &amp;&amp; n.b == r.leaf {
+                <span class="tok-k">return</span> r.leaf
         }
-        if n.color == B &amp;& n.a == r.leaf &amp;& n.b == r.leaf {
-                return r.bbleaf
+        <span class="tok-k">if</span> n.color == B &amp;&amp; n.a == r.leaf &amp;&amp; n.b == r.leaf {
+                <span class="tok-k">return</span> r.bbleaf
         }
-        if n.color == B &amp;& n.a == r.leaf &amp;& n.b != r.leaf &amp;& n.b.color == R {
+        <span class="tok-k">if</span> n.color == B &amp;&amp; n.a == r.leaf &amp;&amp; n.b != r.leaf &amp;&amp; n.b.color == R {
                 n.b.color = B
-                return n.b
+                <span class="tok-k">return</span> n.b
         }
-        if n.color == B &amp;& n.b == r.leaf &amp;& n.a != r.leaf &amp;& n.a.color == R {
+        <span class="tok-k">if</span> n.color == B &amp;&amp; n.b == r.leaf &amp;&amp; n.a != r.leaf &amp;&amp; n.a.color == R {
                 n.a.color = B
-                return n.a
+                <span class="tok-k">return</span> n.a
         }
-        n.key, n.value = r.max(n.a)
-        n.a = r.removeMax(n.a)
-        n = r.bubble(n)
-        return n
+        n.key, n.value = r.<span class="tok-b">max</span>(n.a)
+        n.a = r.<span class="tok-f">removeMax</span>(n.a)
+        n = r.<span class="tok-f">bubble</span>(n)
+        <span class="tok-k">return</span> n
 }
-func (r *rbmap[K, V]) max(n *node[K, V]) (K, V) {
-        for n.b != r.leaf {
+<span class="tok-k">func</span> (r *rbmap[K, V]) <span class="tok-b">max</span>(n *node[K, V]) (K, V) {
+        <span class="tok-k">for</span> n.b != r.leaf {
                 n = n.b
         }
-        return n.key, n.value
+        <span class="tok-k">return</span> n.key, n.value
 }
-func (r *rbmap[K, V]) removeMax(n *node[K, V]) *node[K, V] {
-        if n.b == r.leaf {
-                return r.remove(n)
+<span class="tok-k">func</span> (r *rbmap[K, V]) <span class="tok-f">removeMax</span>(n *node[K, V]) *node[K, V] {
+        <span class="tok-k">if</span> n.b == r.leaf {
+                <span class="tok-k">return</span> r.<span class="tok-f">remove</span>(n)
         }
-        n.b = r.removeMax(n.b)
-        return r.bubble(n)
+        n.b = r.<span class="tok-f">removeMax</span>(n.b)
+        <span class="tok-k">return</span> r.<span class="tok-f">bubble</span>(n)
 }
-func (r *rbmap[K, V]) bubble(n *node[K, V]) *node[K, V] {
-        if n.a.color == BB || n.b.color == BB {
-                n.color = blacker(n.color)
-                n.a = r.redder(n.a)
-                n.b = r.redder(n.b)
-                return balance(n)
+<span class="tok-k">func</span> (r *rbmap[K, V]) <span class="tok-f">bubble</span>(n *node[K, V]) *node[K, V] {
+        <span class="tok-k">if</span> n.a.color == BB || n.b.color == BB {
+                n.color = <span class="tok-f">blacker</span>(n.color)
+                n.a = r.<span class="tok-f">redder</span>(n.a)
+                n.b = r.<span class="tok-f">redder</span>(n.b)
+                <span class="tok-k">return</span> <span class="tok-f">balance</span>(n)
         }
-        return balance(n)
+        <span class="tok-k">return</span> <span class="tok-f">balance</span>(n)
 }
-func (r *rbmap[K, V]) redder(n *node[K, V]) *node[K, V] {
-        if n == r.bbleaf {
-                return r.leaf
+<span class="tok-k">func</span> (r *rbmap[K, V]) <span class="tok-f">redder</span>(n *node[K, V]) *node[K, V] {
+        <span class="tok-k">if</span> n == r.bbleaf {
+                <span class="tok-k">return</span> r.leaf
         }
-        n.color = redder(n.color)
-        return n
+        n.color = <span class="tok-f">redder</span>(n.color)
+        <span class="tok-k">return</span> n
 }
-func redder(c color) color {
-        switch c {
-        case R:
-                return NB
-        case B:
-                return R
-        case BB:
-                return B
-        case NB:
-                panic("impossible")
+<span class="tok-k">func</span> <span class="tok-f">redder</span>(c color) color {
+        <span class="tok-k">switch</span> c {
+        <span class="tok-k">case</span> R:
+                <span class="tok-k">return</span> NB
+        <span class="tok-k">case</span> B:
+                <span class="tok-k">return</span> R
+        <span class="tok-k">case</span> BB:
+                <span class="tok-k">return</span> B
+        <span class="tok-k">case</span> NB:
+                <span class="tok-b">panic</span>(<span class="tok-s">&#34;impossible&#34;</span>)
         }
-        panic("why come here")
+        <span class="tok-b">panic</span>(<span class="tok-s">&#34;why come here&#34;</span>)
 }
-func blacker(c color) color {
-        switch c {
-        case NB:
-                return R
-        case R:
-                return B
-        case B:
-                return BB
-        default:
-                panic("unmöglish")
+<span class="tok-k">func</span> <span class="tok-f">blacker</span>(c color) color {
+        <span class="tok-k">switch</span> c {
+        <span class="tok-k">case</span> NB:
+                <span class="tok-k">return</span> R
+        <span class="tok-k">case</span> R:
+                <span class="tok-k">return</span> B
+        <span class="tok-k">case</span> B:
+                <span class="tok-k">return</span> BB
+        <span class="tok-k">default</span>:
+                <span class="tok-b">panic</span>(<span class="tok-s">&#34;unmöglish&#34;</span>)
         }
 }
-func (r rbmap[K, V]) CheckInvariants() {
-        if r.root.color != B {
-                panic("root must be black")
+<span class="tok-k">func</span> (r rbmap[K, V]) <span class="tok-f">CheckInvariants</span>() {
+        <span class="tok-k">if</span> r.root.color != B {
+                <span class="tok-b">panic</span>(<span class="tok-s">&#34;root must be black&#34;</span>)
         }
-        ys := make([]int, 0)
+        ys := <span class="tok-b">make</span>([]<span class="tok-b">int</span>, <span class="tok-n">0</span>)
         xs := &amp;ys
-        r.check(r.root, 0, xs)
-        i := 1
-        for i &lt; len(*xs) {
-                if (*xs)[i-1] != (*xs)[i] {
-                        fmt.Println(xs)
-                        panic("black height not same for all the leaves")
+        r.<span class="tok-f">check</span>(r.root, <span class="tok-n">0</span>, xs)
+        i := <span class="tok-n">1</span>
+        <span class="tok-k">for</span> i &lt; <span class="tok-b">len</span>(*xs) {
+                <span class="tok-k">if</span> (*xs)[i-<span class="tok-n">1</span>] != (*xs)[i] {
+                        fmt.<span class="tok-f">Println</span>(xs)
+                        <span class="tok-b">panic</span>(<span class="tok-s">&#34;black height not same for all the leaves&#34;</span>)
                 }
                 i++
         }
 }
-func (r rbmap[K, V]) check(n *node[K, V], bh int, xs *[]int) {
-        if n == r.leaf {
-                *xs = append(*xs, bh)
-                return
+<span class="tok-k">func</span> (r rbmap[K, V]) <span class="tok-f">check</span>(n *node[K, V], bh <span class="tok-b">int</span>, xs *[]<span class="tok-b">int</span>) {
+        <span class="tok-k">if</span> n == r.leaf {
+                *xs = <span class="tok-b">append</span>(*xs, bh)
+                <span class="tok-k">return</span>
         }
-        if n.color == R {
-                if !colors(n, n.a, n.b, R, B, B) {
-                        r.Preorder()
-                        fmt.Println(n, n.a, n.b)
-                        panic("red node without both children black")
+        <span class="tok-k">if</span> n.color == R {
+                <span class="tok-k">if</span> !<span class="tok-f">colors</span>(n, n.a, n.b, R, B, B) {
+                        r.<span class="tok-f">Preorder</span>()
+                        fmt.<span class="tok-f">Println</span>(n, n.a, n.b)
+                        <span class="tok-b">panic</span>(<span class="tok-s">&#34;red node without both children black&#34;</span>)
                 }
         }
-        if n.color == B {
-                bh += 1
+        <span class="tok-k">if</span> n.color == B {
+                bh += <span class="tok-n">1</span>
         }
-        r.check(n.a, bh, xs)
-        r.check(n.b, bh, xs)
+        r.<span class="tok-f">check</span>(n.a, bh, xs)
+        r.<span class="tok-f">check</span>(n.b, bh, xs)
 }
 
-func main() {
-        a := New[int, string](func(x, y int) bool { return x &lt; y })
-        a.Set(12, "twelve")
-        b := New[string, int](func(x, y string) bool { return x &lt; y })
-        b.Set("twelve", 12)
-        b.Set("a", 12)
-        b.Set("b", 12)
-        b.(*rbmap[string, int]).Preorder()
-        fmt.Println(a, b)
-}
-        </pre>
+<span class="tok-k">func</span> <span class="tok-f">main</span>() {
+        a := New[<span class="tok-b">int</span>, <span class="tok-b">string</span>](<span class="tok-k">func</span>(x, y <span class="tok-b">int</span>) <span class="tok-b">bool</span> { <span class="tok-k">return</span> x &lt; y })
+        a.<span class="tok-f">Set</span>(<span class="tok-n">12</span>, <span class="tok-s">&#34;twelve&#34;</span>)
+        b := New[<span class="tok-b">string</span>, <span class="tok-b">int</span>](<span class="tok-k">func</span>(x, y <span class="tok-b">string</span>) <span class="tok-b">bool</span> { <span class="tok-k">return</span> x &lt; y })
+        b.<span class="tok-f">Set</span>(<span class="tok-s">&#34;twelve&#34;</span>, <span class="tok-n">12</span>)
+        b.<span class="tok-f">Set</span>(<span class="tok-s">&#34;a&#34;</span>, <span class="tok-n">12</span>)
+        b.<span class="tok-f">Set</span>(<span class="tok-s">&#34;b&#34;</span>, <span class="tok-n">12</span>)
+        b.(*rbmap[<span class="tok-b">string</span>, <span class="tok-b">int</span>]).<span class="tok-f">Preorder</span>()
+        fmt.<span class="tok-f">Println</span>(a, b)
+}</code></pre></div>
 
+</div>
+<footer class="post-foot">
+<p class="filed">Filed under <a href="/tags/data-structure/">data-structure</a>, <a href="/tags/generics/">generics</a>, <a href="/tags/golang/">golang</a>, <a href="/tags/implementation/">implementation</a>, <a href="/tags/functional-programming/">functional-programming</a>.</p>
+<section class="related"><h2>More on the same subjects</h2><ul>
+<li><a href="/iter.html">Iterating over a Trie with Channels and Goroutines</a>, <time datetime="2021-05-23">23 May 2021</time></li>
+<li><a href="/interface.html">Simplify Testing by Embedding Interfaces</a>, <time datetime="2021-05-07">7 May 2021</time></li>
+<li><a href="/complex-mars-rover.html">Complex Numbers and the Mars Rover Challenge</a>, <time datetime="2023-02-15">15 February 2023</time></li>
+</ul></section>
+<nav class="prevnext" aria-label="Neighbouring posts">
+
+<p>After this, <a href="/interface.html" rel="next">Simplify Testing by Embedding Interfaces</a></p>
+</nav>
+</footer>
+</article>
+
+</main>
+<footer class="colophon">
+<div class="wrap">
+<p>Pratik Deoghare, 2026.</p>
+<p>Follow along with the <a href="/feed.xml">Atom feed</a> or <a href="/rss.xml">RSS</a>. Made with barkdown.</p>
+</div>
+</footer>
+<script src="/assets/site.js?v=a435d03c" defer></script>
 </body>
 </html>

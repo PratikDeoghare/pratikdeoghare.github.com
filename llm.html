@@ -1,86 +1,128 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta name="generator" content=
-"HTML Tidy for HTML5 for Linux version 5.8.0">
 <meta charset="utf-8">
-<meta name="viewport" content=
-"width=device-width, initial-scale=1">
-
-	<link rel="stylesheet" href="style.css" type="text/css">
-	
-<title>On LLMs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On LLMs, Pratik Deoghare</title>
+<meta name="description" content="Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less. Marie Curie I am…">
+<meta name="generator" content="barkdown">
+<meta name="theme-color" content="#fffff8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151515" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://pratik.deoghare.com/llm.html">
+<link rel="alternate" type="application/atom+xml" title="Pratik Deoghare" href="/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Pratik Deoghare (RSS)" href="/rss.xml">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+@font-face { font-family: "et-book"; src: url("https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff") format("woff"); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: "et-book"; src: url("https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff") format("woff"); font-weight: normal; font-style: italic; font-display: swap; }
+@font-face { font-family: "et-book"; src: url("https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff"); font-weight: bold; font-style: normal; font-display: swap; }
+</style>
+<link rel="stylesheet" href="/assets/style.css?v=674200dc">
+<meta property="og:site_name" content="Pratik Deoghare">
+<meta property="og:title" content="On LLMs">
+<meta property="og:description" content="Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less. Marie Curie I am…">
+<meta property="og:url" content="https://pratik.deoghare.com/llm.html">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2026-05-17T12:41:00&#43;02:00">
+<meta property="article:tag" content="llm">
+<meta property="article:tag" content="gen-ai">
+<meta property="article:tag" content="observations">
+<meta name="twitter:card" content="summary">
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 </head>
-<body>
+<body class="kind-post">
+<a class="skip" href="#main">Skip to the writing</a>
+<header class="masthead">
+<div class="wrap">
+<p class="brand"><a href="/">Pratik Deoghare</a></p>
+<p class="tagline">Welcome to my website!</p>
+<nav class="menu" aria-label="Site">
+<a href="/">Home</a>
+<a href="/about/">About</a>
+<a href="/archive/">Archive</a>
+<a href="/tags/">Tags</a>
+<a href="/search/">Search</a>
+<button class="lamp" type="button">Dim the lamp</button>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
 
+<article class="post">
+<header class="post-header">
 <h1>On LLMs</h1>
-<p class="subtitle">Pratik Deoghare</p>
 
-<blockquote> Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less.
-
- -- Marie Curie </blockquote>
-
-<p> I am neither
+<p class="meta"><time datetime="2026-05-17">17 May 2026</time>, by Pratik Deoghare. About 2 minutes to read.</p>
+</header>
+<div class="content">
+<div class="epigraph"><blockquote>
+<p>Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less.</p>
+<footer class="by">— Marie Curie</footer>
+</blockquote></div>
+<p>I am neither
 pro nor anti-llms. Nobody knows how things will turn out.
 Only time will tell what happens. Instead
 of subscribing to a narrative and chosing sides I have chosen to have microstabs at the thing
-by making various observations. </p>
-
-
-<p> <b> Are llms here to stay? </b> Yes. They have text capabilities
- that are hard or impossible to replicate any other way. </p>
-
-<p> <b> Are llms AI? </b> No. “AI” is a marketing term.
+by making various observations.</p>
+<p><span class="newthought">Are llms here to stay?</span> Yes. They have text capabilities
+that are hard or impossible to replicate any other way.</p>
+<p><span class="newthought">Are llms AI?</span> No. “AI” is a marketing term.
 I would expect AI to be able to solve Sudoku.
 LLMs by themselves cannot do that.
-They can, however, use "function calling" to solve Sudoku. They
+They can, however, use &#34;function calling&#34; to solve Sudoku. They
 cannot even call functions themselves. You have to prompt them
 to output in some format, another program parses the formatted output and
-calls functions. </p>
-
-<p> <b> Is there software now that wouldn’t exist without llms? </b> Yes.
-
-I wanted an Emacs <a href="https://github.com/PratikDeoghare/brashtag/blob/master/docs/emacs-brashtag-click.gif"> mode for a notation I use</a>. I didn’t have time
+calls functions.</p>
+<p><span class="newthought">Is there software now that wouldn’t exist without llms?</span> Yes.
+I wanted an Emacs <a href="https://github.com/PratikDeoghare/brashtag/blob/master/docs/emacs-brashtag-click.gif" class="external" rel="noopener">mode for a notation I use</a>. I didn’t have time
 to learn enough Emacs to implement it myself. I asked ChatGPT, and it
 created a working implementation
 for me. It would have been hard to find anybody who
 would be interested in building it for free
-or as quickly. There must be a lot of programs like this out there.
-</p>
-
-<p> <b> We have lost valuable online communities. </b>
+or as quickly. There must be a lot of programs like this out there.</p>
+<p><span class="newthought">We have lost valuable online communities.</span>
 They might come back only after it is understood by sufficient
 number of people what we have lost. That might take a very long time.
 I am thinking it will be centuries before they come back.
-
 On stackoverflow I could ask questions.
 I could answer questions. Asking and answering got you reputation.
 I could see other people with broader and deeper knowledge answering
-questions. I saw Jon Skeet and others. I hadn't even thought you
+questions. I saw Jon Skeet and others. I hadn&#39;t even thought you
 could be that good. In the world where everybody is using chatbots how
 will I know who is a great programmer? How great it is possible to be?
-Where do I stand? Who will I imitate?
-</p>
-
-<p> <b> Will reliance on llms to write code make us weak and stupid? </b>
-Yes. How many of us can hunt? I rely on supermarket to feed me.
-</p>
-
-<p> <b> The Donkey in the Tiger-skin? </b>
+Where do I stand? Who will I imitate?</p>
+<p><span class="newthought">Will reliance on llms to write code make us weak and stupid?</span>
+Yes. How many of us can hunt? I rely on supermarket to feed me.</p>
+<p><span class="newthought">The Donkey in the Tiger-skin?</span>
 Some people use llms to appear smarter than they are in discussions
-and to pretend to know things that they don't. This reminds me of
+and to pretend to know things that they don&#39;t. This reminds me of
 story of
-<a href="https://en.wikisource.org/wiki/The_Panchatantra_(Purnabhadra%27s_Recension_of_1199_CE)/Book_4/The_Ass_in_the_Tiger-Skin">The Donkey in the Tiger-skin</a>.
-</p>
+<a href="https://en.wikisource.org/wiki/The_Panchatantra_(Purnabhadra%27s_Recension_of_1199_CE)/Book_4/The_Ass_in_the_Tiger-Skin" class="external" rel="noopener">The Donkey in the Tiger-skin</a>.</p>
+<p><span class="newthought">Do I use llms?</span>
+Code for my personal projects is written entirely by hand.
+This blog is entirely written by hand. Except one time I fed the blog
+to claude to change stylesheet. It made other changes that I didn&#39;t like.
+Some of those might have escaped my notice while reverting the older blog posts.
+If you see an emdash or a semicolon it is not from me.</p>
 
-<p> <b> Do I use llms? </b>
-	Code for my personal projects is written entirely by hand.
-	This blog is entirely written by hand. Except one time I fed the blog
-	to claude to change stylesheet. It made other changes that I didn't like.
-	Some of those might have escaped my notice while reverting the older blog posts.
-	If you see an emdash or a semicolon it is not from me.
-</p>
+</div>
+<footer class="post-foot">
+<p class="filed">Filed under <a href="/tags/llm/">llm</a>, <a href="/tags/gen-ai/">gen-ai</a>, <a href="/tags/observations/">observations</a>.</p>
 
+<nav class="prevnext" aria-label="Neighbouring posts">
+<p>Before this, <a href="/pulumify.html" rel="prev">Pulumify</a></p>
 
+</nav>
+</footer>
+</article>
+
+</main>
+<footer class="colophon">
+<div class="wrap">
+<p>Pratik Deoghare, 2026.</p>
+<p>Follow along with the <a href="/feed.xml">Atom feed</a> or <a href="/rss.xml">RSS</a>. Made with barkdown.</p>
+</div>
+</footer>
+<script src="/assets/site.js?v=a435d03c" defer></script>
 </body>
 </html>

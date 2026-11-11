@@ -1,138 +1,175 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta name="generator" content=
-"HTML Tidy for HTML5 for Linux version 5.8.0">
 <meta charset="utf-8">
-<meta name="viewport" content=
-"width=device-width, initial-scale=1">
-
-    
-    
-		<link rel="stylesheet" href="style.css" type="text/css">
-	
-    
-<title>Maximum Sum Subarray in O(n) without Kadane's
-Algorithm</title>
-
-<script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\[', '\\]']]
-      }
-    };
-</script>
-<script src=
-"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maximum Sum Subarray in O(n) without Kadane&#39;s Algorithm, Pratik Deoghare</title>
+<meta name="description" content="Reduction to Shortest Paths Given an array $A$ of length $n$, construct a directed graph as follows. Graph construction for maximum subarray sum Add vertices Add special vertices src, sink.…">
+<meta name="generator" content="barkdown">
+<meta name="theme-color" content="#fffff8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151515" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://pratik.deoghare.com/nokadane.html">
+<link rel="alternate" type="application/atom+xml" title="Pratik Deoghare" href="/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Pratik Deoghare (RSS)" href="/rss.xml">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+@font-face { font-family: "et-book"; src: url("https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff") format("woff"); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: "et-book"; src: url("https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff") format("woff"); font-weight: normal; font-style: italic; font-display: swap; }
+@font-face { font-family: "et-book"; src: url("https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff"); font-weight: bold; font-style: normal; font-display: swap; }
+</style>
+<link rel="stylesheet" href="/assets/style.css?v=674200dc">
+<meta property="og:site_name" content="Pratik Deoghare">
+<meta property="og:title" content="Maximum Sum Subarray in O(n) without Kadane&#39;s Algorithm">
+<meta property="og:description" content="Reduction to Shortest Paths Given an array $A$ of length $n$, construct a directed graph as follows. Graph construction for maximum subarray sum Add vertices Add special vertices src, sink.…">
+<meta property="og:url" content="https://pratik.deoghare.com/nokadane.html">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2025-06-12T00:00:00&#43;02:00">
+<meta property="article:tag" content="algorithm">
+<meta name="twitter:card" content="summary">
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
 </head>
-<body>
+<body class="kind-post">
+<a class="skip" href="#main">Skip to the writing</a>
+<header class="masthead">
+<div class="wrap">
+<p class="brand"><a href="/">Pratik Deoghare</a></p>
+<p class="tagline">Welcome to my website!</p>
+<nav class="menu" aria-label="Site">
+<a href="/">Home</a>
+<a href="/about/">About</a>
+<a href="/archive/">Archive</a>
+<a href="/tags/">Tags</a>
+<a href="/search/">Search</a>
+<button class="lamp" type="button">Dim the lamp</button>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
 
-<h1>Maximum Subarray Sum</h1>
-<p class="subtitle">Pratik Deoghare</p>
-<p>Given an array \(A\) of length \(n\), construct a directed graph
+<article class="post">
+<header class="post-header">
+<h1>Maximum Sum Subarray in O(n) without Kadane&#39;s Algorithm</h1>
+<p class="subtitle">Maximum Subarray Sum</p>
+<p class="meta"><time datetime="2025-06-12">12 June 2025</time>, by Pratik Deoghare. About 2 minutes to read.</p>
+</header>
+<div class="content">
+<nav class="toc" id="contents" aria-label="In this post"><p class="toc-title">In this post</p><ul><li><a href="#reduction-to-shortest-paths">Reduction to Shortest Paths</a><ul><li><a href="#add-vertices">Add vertices</a></li><li><a href="#add-edges">Add edges</a></li></ul></li><li><a href="#derivation">Derivation</a><ul><li><a href="#substitute-adjacent-vertices">Substitute adjacent vertices</a></li><li><a href="#substitute-weights">Substitute weights</a></li><li><a href="#substitute-implementation-of-relax">Substitute implementation of RELAX</a></li></ul></li><li><a href="#go-implementation">Go Implementation</a></li></ul></nav><a class="goto-toc" href="#contents">Back to contents</a>
+<h2 id="reduction-to-shortest-paths">Reduction to Shortest Paths <a class="anchor" href="#reduction-to-shortest-paths" aria-label="Link to this section">#</a></h2>
+<p>Given an array <span class="math">\(A\)</span> of length <span class="math">\(n\)</span>, construct a directed graph
 as follows.</p>
-<figure><img src="nokadane_cream.png" width="500" alt=
-"Graph construction for maximum subarray sum"></figure>
-<h2>Graph Construction</h2>
-<h3>Add vertices</h3>
+<p><img src="nokadane.png" alt="Graph construction for maximum subarray sum" loading="lazy"></p>
+<h3 id="add-vertices">Add vertices <a class="anchor" href="#add-vertices" aria-label="Link to this section">#</a></h3>
 <ul>
 <li>Add special vertices <code>src</code>, <code>sink</code>.</li>
-<li>Add one vertex \(v_i\) for each \(A_i\).</li>
+<li>Add one vertex <span class="math">\(v_i\)</span> for each <span class="math">\(A_i\)</span>.</li>
 </ul>
-\[ V := \{\text{src}, \text{sink}\} \cup \{v_i \text{ for } 1 \leq
-i \leq n\} \]
-<h3>Add edges</h3>
+<div class="math">\[V := \{\text{src}, \text{sink}\} \cup \{v_i \text{ for } 1 \leq i \leq n\}\]</div>
+<h3 id="add-edges">Add edges <a class="anchor" href="#add-edges" aria-label="Link to this section">#</a></h3>
 <ul>
-<li>Add edge of weight 0 from <code>src</code> to each
-\(v_i\).</li>
-<li>Add edge of weight \(-A[i]\) from \(v_i\) to
-<code>sink</code>.</li>
-<li>Add edge of weight \(-A[i]\) from \(v_i\) to \(v_{i+1}\).</li>
+<li>Add edge of weight 0 from <code>src</code> to each <span class="math">\(v_i\)</span>.</li>
+<li>Add edge of weight <span class="math">\(-A[i]\)</span> from <span class="math">\(v_i\)</span> to <code>sink</code>.</li>
+<li>Add edge of weight <span class="math">\(-A[i]\)</span> from <span class="math">\(v_i\)</span> to <span class="math">\(v_{i+1}\)</span>.</li>
 </ul>
-\[ E := \{(\text{src}, v_i, 0)\} \cup \{(v_i, \text{sink}, -A[i])\}
-\cup \{(v_i, v_{i+1}, -A[i])\} \]
+<div class="math">\[E := \{(\text{src}, v_i, 0)\} \cup \{(v_i, \text{sink}, -A[i])\} \cup \{(v_i, v_{i+1}, -A[i])\}\]</div>
 <p>We find shortest path from <code>src</code> to
-<code>sink</code>. \(-1\) times cost of that path is our
+<code>sink</code>. <span class="math">\(-1\)</span> times cost of that path is our
 answer.</p>
-<h2>Implementation</h2>
-<p>Now, you might be thinking Kadane's algorithm is just a few
+<h2 id="derivation">Derivation <a class="anchor" href="#derivation" aria-label="Link to this section">#</a></h2>
+<p>Now, you might be thinking Kadane&#39;s algorithm is just a few
 lines and this one will need a lot of code. Let me show you how
 little code is needed.</p>
 <p>This is a DAG so we can find the shortest path by relaxing edges
-going out of vertices in topological order. We don't need to
+going out of vertices in topological order. We don&#39;t need to
 implement topological sort because we already know the order i.e.
-<code>sink</code>, \(v_n\), \(v_{n-1}\), …, \(v_0\),
+<code>sink</code>, <span class="math">\(v_n\)</span>, <span class="math">\(v_{n-1}\)</span>, …, <span class="math">\(v_0\)</span>,
 <code>src</code>.</p>
-<pre><code>Max-Subarray-Sum(A)
+<div class="codeblock"><pre><code>Max-Subarray-Sum(A)
 1  d[v] = 0 for v ∈ V
 2  d[vₙ] = -A[n]
 3  for vᵢ = vₙ₋₁, ..., v₁, src
 4       for v ∈ Adj[vᵢ]
 5            RELAX(vᵢ, v, weight(vᵢ, v))
-6  return -min{d[v] for v ∈ V}</code></pre>
+6  return -min{d[v] for v ∈ V}</code></pre></div>
 <p>We know there are only two outgoing edges from the vertices
 being relaxed. We replace RELAX by its implementation for each of
 those edges to get the code below.</p>
-<h3>Substitute adjacent vertices</h3>
-<pre><code>Max-Subarray-Sum(A)
+<h3 id="substitute-adjacent-vertices">Substitute adjacent vertices <a class="anchor" href="#substitute-adjacent-vertices" aria-label="Link to this section">#</a></h3>
+<div class="codeblock"><pre><code>Max-Subarray-Sum(A)
 1  d[v] = 0 for v ∈ V
 2  d[vₙ] = -A[n]
 3  for vᵢ = vₙ₋₁, ..., v₁, src
 4       RELAX(vᵢ, vᵢ₊₁, weight(vᵢ, vᵢ₊₁))
 5       RELAX(vᵢ, sink, weight(vᵢ, sink))
-6  return -min{d[v] for v ∈ V}</code></pre>
-<h3>Substitute weights</h3>
-<pre><code>Max-Subarray-Sum(A)
+6  return -min{d[v] for v ∈ V}</code></pre></div>
+<h3 id="substitute-weights">Substitute weights <a class="anchor" href="#substitute-weights" aria-label="Link to this section">#</a></h3>
+<div class="codeblock"><pre><code>Max-Subarray-Sum(A)
 1  d[v] = 0 for v ∈ V
 2  d[vₙ] = -A[n]
 3  for vᵢ = vₙ₋₁, ..., v₁, src
 4       RELAX(vᵢ, vᵢ₊₁, -A[i])
 5       RELAX(vᵢ, sink, -A[i])
-6  return -min{d[v] for v ∈ V}</code></pre>
-<h3>Substitute implementation of RELAX</h3>
-<pre><code>Max-Subarray-Sum(A)
+6  return -min{d[v] for v ∈ V}</code></pre></div>
+<h3 id="substitute-implementation-of-relax">Substitute implementation of RELAX <a class="anchor" href="#substitute-implementation-of-relax" aria-label="Link to this section">#</a></h3>
+<div class="codeblock"><pre><code>Max-Subarray-Sum(A)
 1  d[v] = 0 for v ∈ V
 2  d[vₙ] = -A[n]
 3  for vᵢ = vₙ₋₁, ..., v₁, src
 4       d[vᵢ] = min(d[vᵢ], d[vᵢ₊₁] - A[i])
 5       d[vᵢ] = min(d[vᵢ], d[sink] - A[i])
-6  return -min{d[v] for v ∈ V}</code></pre>
+6  return -min{d[v] for v ∈ V}</code></pre></div>
 <p>This in turn is equivalent to the following final code since
-\(d[\text{sink}] = 0\).</p>
-<pre><code>Max-Subarray-Sum(A)
+<span class="math">\(d[\text{sink}] = 0\)</span>.</p>
+<div class="codeblock"><pre><code>Max-Subarray-Sum(A)
 1  d[v] = 0 for v ∈ V
 2  d[vₙ] = -A[n]
 3  for vᵢ = vₙ₋₁, ..., v₁, src
 4       d[vᵢ] = min(-A[i], d[vᵢ₊₁] - A[i])
-5  return -min{d[v] for v ∈ V}</code></pre>
-<section>
-<h2>Go Implementation</h2>
-<pre><code>func maxSubarraySum(A []int) int {
-    n := len(A)
-    d := make([]int, n)
-    d[n-1] = -A[n-1]
-    for i := n-2; i &gt;= 0; i-- {
-        d[i] = min(-A[i], -A[i] + d[i+1])
+5  return -min{d[v] for v ∈ V}</code></pre></div>
+<h2 id="go-implementation">Go Implementation <a class="anchor" href="#go-implementation" aria-label="Link to this section">#</a></h2>
+<div class="codeblock"><div class="code-head"><span class="lang">go</span></div><pre><code class="language-go"><span class="tok-k">func</span> <span class="tok-f">maxSubarraySum</span>(A []<span class="tok-b">int</span>) <span class="tok-b">int</span> {
+    n := <span class="tok-b">len</span>(A)
+    d := <span class="tok-b">make</span>([]<span class="tok-b">int</span>, n)
+    d[n-<span class="tok-n">1</span>] = -A[n-<span class="tok-n">1</span>]
+    <span class="tok-k">for</span> i := n-<span class="tok-n">2</span>; i &gt;= <span class="tok-n">0</span>; i-- {
+        d[i] = <span class="tok-b">min</span>(-A[i], -A[i] + d[i+<span class="tok-n">1</span>])
     }
-    return -slices.Min(d)
-}</code></pre>
+    <span class="tok-k">return</span> -slices.<span class="tok-f">Min</span>(d)
+}</code></pre></div>
 <p>We could maintain the global min while looping instead of
 computing it at the end using <code>slices.Min</code>.</p>
-<pre><code>func maxSubarraySum(A []int) int {
-    n := len(A)
-    d := make([]int, n)
+<div class="codeblock"><div class="code-head"><span class="lang">go</span></div><pre><code class="language-go"><span class="tok-k">func</span> <span class="tok-f">maxSubarraySum</span>(A []<span class="tok-b">int</span>) <span class="tok-b">int</span> {
+    n := <span class="tok-b">len</span>(A)
+    d := <span class="tok-b">make</span>([]<span class="tok-b">int</span>, n)
 
-    d[n-1] = -A[n-1]
-    minn := d[n-1]
-    for i := n-2; i &gt;= 0; i-- {
-        d[i] = min(-A[i], -A[i] + d[i+1])
-        minn = min(minn, d[i])
+    d[n-<span class="tok-n">1</span>] = -A[n-<span class="tok-n">1</span>]
+    minn := d[n-<span class="tok-n">1</span>]
+    <span class="tok-k">for</span> i := n-<span class="tok-n">2</span>; i &gt;= <span class="tok-n">0</span>; i-- {
+        d[i] = <span class="tok-b">min</span>(-A[i], -A[i] + d[i+<span class="tok-n">1</span>])
+        minn = <span class="tok-b">min</span>(minn, d[i])
     }
-    return -minn
-}</code></pre>
-<p>Looks exactly like Kadane's algorithm, doesn't it?</p>
-</section>
+    <span class="tok-k">return</span> -minn
+}</code></pre></div>
+<p>Looks exactly like Kadane&#39;s algorithm, doesn&#39;t it?</p>
 
+</div>
+<footer class="post-foot">
+<p class="filed">Filed under <a href="/tags/algorithm/">algorithm</a>.</p>
+
+<nav class="prevnext" aria-label="Neighbouring posts">
+<p>Before this, <a href="/sum35.html" rel="prev">Why don’t the simple formulas work?</a></p>
+<p>After this, <a href="/pulumify.html" rel="next">Pulumify</a></p>
+</nav>
+</footer>
+</article>
+
+</main>
+<footer class="colophon">
+<div class="wrap">
+<p>Pratik Deoghare, 2026.</p>
+<p>Follow along with the <a href="/feed.xml">Atom feed</a> or <a href="/rss.xml">RSS</a>. Made with barkdown.</p>
+</div>
+</footer>
+<script src="/assets/site.js?v=a435d03c" defer></script>
 </body>
 </html>

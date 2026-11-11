@@ -1,40 +1,61 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta name="generator" content=
-"HTML Tidy for HTML5 for Linux version 5.8.0">
 <meta charset="utf-8">
-<meta name="viewport" content=
-"width=device-width, initial-scale=1">
-
-
-		<link rel="stylesheet" href="style.css" type="text/css">
-	
-
-<title>Why don’t the simple formulas work?</title>
-<!-- MathJax -->
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why don’t the simple formulas work?, Pratik Deoghare</title>
+<meta name="description" content="The following derivation produces two formulas that appear equivalent, yet behave differently when implemented. What’s going on? We want to write a program to find the sum of all multiples…">
+<meta name="generator" content="barkdown">
+<meta name="theme-color" content="#fffff8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151515" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://pratik.deoghare.com/sum35.html">
+<link rel="alternate" type="application/atom+xml" title="Pratik Deoghare" href="/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Pratik Deoghare (RSS)" href="/rss.xml">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <style>
-  .MathJax {
-  font-size: 1em !important;
-  }
-
+@font-face { font-family: "et-book"; src: url("https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff") format("woff"); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: "et-book"; src: url("https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff") format("woff"); font-weight: normal; font-style: italic; font-display: swap; }
+@font-face { font-family: "et-book"; src: url("https://cdn.jsdelivr.net/npm/tufte-css@1.8.0/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff"); font-weight: bold; font-style: normal; font-display: swap; }
 </style>
-
-<script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\[', '\\]']]
-      }
-    };
-</script>
-<script src=
-"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="/assets/style.css?v=674200dc">
+<meta property="og:site_name" content="Pratik Deoghare">
+<meta property="og:title" content="Why don’t the simple formulas work?">
+<meta property="og:description" content="The following derivation produces two formulas that appear equivalent, yet behave differently when implemented. What’s going on? We want to write a program to find the sum of all multiples…">
+<meta property="og:url" content="https://pratik.deoghare.com/sum35.html">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2023-07-01T00:00:00&#43;02:00">
+<meta property="article:tag" content="math">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="puzzle">
+<meta name="twitter:card" content="summary">
+<script>document.documentElement.classList.add("js");try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
 </head>
-<body>
+<body class="kind-post">
+<a class="skip" href="#main">Skip to the writing</a>
+<header class="masthead">
+<div class="wrap">
+<p class="brand"><a href="/">Pratik Deoghare</a></p>
+<p class="tagline">Welcome to my website!</p>
+<nav class="menu" aria-label="Site">
+<a href="/">Home</a>
+<a href="/about/">About</a>
+<a href="/archive/">Archive</a>
+<a href="/tags/">Tags</a>
+<a href="/search/">Search</a>
+<button class="lamp" type="button">Dim the lamp</button>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap">
 
+<article class="post">
+<header class="post-header">
 <h1>Why don’t the simple formulas work?</h1>
+
+<p class="meta"><time datetime="2023-07-01">1 July 2023</time>. About 2 minutes to read.</p>
+</header>
+<div class="content">
 <p>The following derivation produces two formulas that appear
 equivalent, yet behave differently when implemented.</p>
 <p>What’s going on?</p>
@@ -45,91 +66,71 @@ multiple of both, count it only once.</p>
 approach is to add all multiples of 3, add all multiples of 5, and
 subtract the multiples of 15 once to account for
 double-counting.</p>
-<p>We can write the sum as: \[ \begin{align} f(n) &amp;= (3 + 6 + 9
-+ \dots) + (5 + 10 + 15 + \dots) - (15 + 30 + 45 + \dots) \\ &amp;=
-3(1 + 2 + 3 + \dots) + 5(1 + 2 + 3 + \dots) - 15(1 + 2 + 3 + \dots)
-\\ &amp;= 3S(n/3) + 5S(n/5) - 15S(n/15) \tag{1} \\ &amp;= 3 \cdot
-\frac{1}{2}\frac{n}{3}\left(\frac{n}{3}+1\right) + 5 \cdot
-\frac{1}{2}\frac{n}{5}\left(\frac{n}{5}+1\right) - 15 \cdot
-\frac{1}{2}\frac{n}{15}\left(\frac{n}{15}+1\right) \end{align}
-\]</p>
+<p>We can write the sum as:</p>
+<div class="math">\[\begin{align} f(n) &amp;= (3 + 6 + 9 + \dots) + (5 + 10 + 15 + \dots) - (15 + 30 + 45 + \dots) \\ &amp;= 3(1 + 2 + 3 + \dots) + 5(1 + 2 + 3 + \dots) - 15(1 + 2 + 3 + \dots) \\ &amp;= 3S(n/3) + 5S(n/5) - 15S(n/15) \,\,\,\,\ldots (1)\\ &amp;= 3 \cdot \frac{1}{2}\frac{n}{3}\left(\frac{n}{3}+1\right) + 5 \cdot \frac{1}{2}\frac{n}{5}\left(\frac{n}{5}+1\right) - 15 \cdot \frac{1}{2}\frac{n}{15}\left(\frac{n}{15}+1\right) \end{align}\]</div>
 <p>Which simplifies to:</p>
-\[ = \frac{n}{2} \left( \frac{n}{3} + 1 + \frac{n}{5} + 1 -
-\frac{n}{15} - 1 \right) \]
+<div class="math">\[= \frac{n}{2} \left( \frac{n}{3} + 1 + \frac{n}{5} + 1 - \frac{n}{15} - 1 \right)\]</div>
 <p>And finally:</p>
-\[ = \frac{n}{2} \left( \frac{n}{3} + \frac{n}{5} - \frac{n}{15} +
-1 \tag{2} \right) \]
-<h2>Python code</h2>
-<pre>
-      # Sum of first k numbers
-      def s(k):
-          return (k * (k + 1)) // 2
+<div class="math">\[= \frac{n}{2} \left( \frac{n}{3} + \frac{n}{5} - \frac{n}{15} + 1 \right) \,\,\,\,\ldots (2)\]</div>
+<h2 id="python-code">Python code <a class="anchor" href="#python-code" aria-label="Link to this section">#</a></h2>
+<div class="codeblock"><div class="code-head"><span class="lang">python</span></div><pre><code class="language-python"><span class="tok-c"># Sum of first k numbers</span>
+<span class="tok-k">def</span> <span class="tok-f">s</span>(k):
+    <span class="tok-k">return</span> (k * (k + <span class="tok-n">1</span>)) // <span class="tok-n">2</span>
 
-      # From Equation 1
-      def ss(n):
-          return 3 * s(n // 3) + 5 * s(n // 5) - 15 * s(n // 15)
+<span class="tok-c"># From Equation 1</span>
+<span class="tok-k">def</span> <span class="tok-f">ss</span>(n):
+    <span class="tok-k">return</span> <span class="tok-n">3</span> * <span class="tok-f">s</span>(n // <span class="tok-n">3</span>) + <span class="tok-n">5</span> * <span class="tok-f">s</span>(n // <span class="tok-n">5</span>) - <span class="tok-n">15</span> * <span class="tok-f">s</span>(n // <span class="tok-n">15</span>)
 
-      # From Equation 2
-      def sss(n):
-          return (n // 2) * (n // 3 + n // 5 - n // 15 + 1)
+<span class="tok-c"># From Equation 2</span>
+<span class="tok-k">def</span> <span class="tok-f">sss</span>(n):
+    <span class="tok-k">return</span> (n // <span class="tok-n">2</span>) * (n // <span class="tok-n">3</span> + n // <span class="tok-n">5</span> - n // <span class="tok-n">15</span> + <span class="tok-n">1</span>)
 
-      # Testing both implementations:
-      # (n, expected)
-      tests = [
-          (3, 3),
-          (5, 8),
-          (0, 0),
-          (10, 33),
-          (1000, 234168),
-      ]
+<span class="tok-c"># Testing both implementations:</span>
+<span class="tok-c"># (n, expected)</span>
+tests = [
+    (<span class="tok-n">3</span>, <span class="tok-n">3</span>),
+    (<span class="tok-n">5</span>, <span class="tok-n">8</span>),
+    (<span class="tok-n">0</span>, <span class="tok-n">0</span>),
+    (<span class="tok-n">10</span>, <span class="tok-n">33</span>),
+    (<span class="tok-n">1000</span>, <span class="tok-n">234168</span>),
+]
 
-      for n, expected in tests:
-          print(n, expected, ss(n), sss(n))
-        </pre>
-<h2>Output</h2>
-<table border="1">
-<tr>
-<th>n</th>
-<th>expected</th>
-<th>ss(n)</th>
-<th>sss(n)</th>
-</tr>
-<tr>
-<td>3</td>
-<td>3</td>
-<td>3</td>
-<td>2</td>
-</tr>
-<tr>
-<td>5</td>
-<td>8</td>
-<td>8</td>
-<td>6</td>
-</tr>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>10</td>
-<td>33</td>
-<td>33</td>
-<td>30</td>
-</tr>
-<tr>
-<td>1000</td>
-<td>234168</td>
-<td>234168</td>
-<td>234000</td>
-</tr>
-</table>
+<span class="tok-k">for</span> n, expected <span class="tok-k">in</span> tests:
+    <span class="tok-b">print</span>(n, expected, <span class="tok-f">ss</span>(n), <span class="tok-f">sss</span>(n))</code></pre></div>
+<h2 id="output">Output <a class="anchor" href="#output" aria-label="Link to this section">#</a></h2>
+<div class="table"><table><thead><tr><th>n</th><th>expected</th><th>ss(n)</th><th>sss(n)</th></tr>
+</thead><tbody><tr><td>3</td><td>3</td><td>3</td><td>2</td></tr>
+<tr><td>5</td><td>8</td><td>8</td><td>6</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>10</td><td>33</td><td>33</td><td>30</td></tr>
+<tr><td>1000</td><td>234168</td><td>234168</td><td>234000</td></tr>
+</tbody></table></div>
 <p>The function <code>ss</code> produces the correct result. The
 function <code>sss</code> does not.</p>
 <p>Both come from the same derivation. Both look algebraically
 equivalent.</p>
 <p>So why do they behave differently?</p>
 
+</div>
+<footer class="post-foot">
+<p class="filed">Filed under <a href="/tags/math/">math</a>, <a href="/tags/python/">python</a>, <a href="/tags/puzzle/">puzzle</a>.</p>
+<section class="related"><h2>More on the same subjects</h2><ul>
+<li><a href="/complex-mars-rover.html">Complex Numbers and the Mars Rover Challenge</a>, <time datetime="2023-02-15">15 February 2023</time></li>
+</ul></section>
+<nav class="prevnext" aria-label="Neighbouring posts">
+<p>Before this, <a href="/complex-mars-rover.html" rel="prev">Complex Numbers and the Mars Rover Challenge</a></p>
+<p>After this, <a href="/nokadane.html" rel="next">Maximum Sum Subarray in O(n) without Kadane&#39;s Algorithm</a></p>
+</nav>
+</footer>
+</article>
+
+</main>
+<footer class="colophon">
+<div class="wrap">
+<p>Pratik Deoghare, 2026.</p>
+<p>Follow along with the <a href="/feed.xml">Atom feed</a> or <a href="/rss.xml">RSS</a>. Made with barkdown.</p>
+</div>
+</footer>
+<script src="/assets/site.js?v=a435d03c" defer></script>
 </body>
 </html>

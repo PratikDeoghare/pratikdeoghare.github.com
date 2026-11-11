@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Pratik Deoghare: thoughts</title>
+  <id>https://pratik.deoghare.com/timeline/</id>
+  <updated>2026-11-11T18:59:10+01:00</updated>
+  <link href="https://pratik.deoghare.com/timeline/feed.xml" rel="self" type="application/atom+xml"></link>
+  <link href="https://pratik.deoghare.com/timeline/" rel="alternate" type="text/html"></link>
+  <author>
+    <name>Pratik Deoghare</name>
+  </author>
+  <generator>barkdown</generator>
+</feed>
